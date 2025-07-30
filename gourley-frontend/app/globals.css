@@ -1,12 +1,18 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --dark-azure: #142F42;
+  --burnt-orange: #DD5339;
+  --hi-viz-lime: #B6F16A;
+  --white: #FEFEFE;
+  --background: var(--white);
+  --foreground: var(--dark-azure);
+  --body-text: var(--white);
+  --heading-text: var(--burnt-orange);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--dark-azure);
+    --foreground: var(--white);
   }
 }
 
