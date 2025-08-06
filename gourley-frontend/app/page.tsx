@@ -1,69 +1,55 @@
+import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import Image from "next/image";
 import Link from "next/link";
-import { getGoogleSheetsData } from "@/gsheet";
-import styles from "./page.module.css";
+import styles from "./home.module.css";
 
+type Props = {
+  cta1: SheetRow[];
+  cta2: SheetRow[];
+  services: SheetRow[];
+};
 
+// define type structure for google content
+type Content = {
+  text: string;
+  imgSrc: string;
+  imgAlt: string;
+  link?: string;
+  linkText?: string;
+};
 
-// pass in content from google sheet (figure out useEffect hook to check for new save info)
-const range = `Sheet1!A:E`;
-const googleContent = await getGoogleSheetsData(id, range);
-//   console.log(posts);
+const cta1 = await fetchSheetData("Home", "A2:F10");
+const cta2 = await fetchSheetData("Home", "J2:O10");
+const services = await fetchSheetData("Home", "H1:H10");
 
+export const revalidate = 0;
 
 export default function Home() {
-  // define type structure for content
-  type Content = {
-    text: string;
-    imgSrc: string;
-    imgAlt: string;
-    link?: string;
-    linkText?: string;
-  };
 
+  console.log("IT DID THE THING", services);
 
-  
-  // hard coded content
-  const heroContent: Content[] = [
-    {
-      text: "Hero Text content",
-      imgSrc: "img link",
-      imgAlt: "img alt",
-    },
-  ];
-
-  const servicesContent: string[] = [
-    "Removals",
-    "Climbing",
-    "Rigging",
-    "Pruning",
-  ];
-
-  const aboutContent: Content[] = [
-    {
-      text: "About text content",
-      imgSrc: "img link",
-      imgAlt: "img alt",
-    },
-  ];
-  
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <section>
           <div className={styles.heroCTA}>
-            {heroContent.map((hero: Content, i: number) => {
+            {cta1.map((hero, i: number) => {
               return (
                 <div key={i} className={styles.wrapper}>
                   <div>
                     <div>{hero.text}</div>
-                    <Image 
-                      src={hero.imgSrc} 
+                    <Image
+                      src={hero.imgSrc}
                       alt={hero.imgAlt}
                       width={100}
                       height={100}
+                      priority
                     />
-                    {hero.link ? <Link href={hero.link}> {hero.linkText}</Link>:<Link href="/contact">Contact Us</Link>}
+                    {hero.link ? (
+                      <Link href={hero.link}> {hero.linkText}</Link>
+                    ) : (
+                      <Link href="/contact">Contact Us</Link>
+                    )}
                   </div>
                 </div>
               );
@@ -71,23 +57,26 @@ export default function Home() {
           </div>
         </section>
 
-        <div className={styles.services}>
-          <ol>
-            {servicesContent.map((service: string, i: number) => {
+        <section className={styles.services}>
+          <ul>
+            {/* {services.map((service: string, i: number) => {
               return <li key={i}>{service}</li>;
-            })}
-          </ol>
-        </div>
+            })} */}
+          </ul>
+          <div className={styles.serviceArea}>
+              {/* info about where Steve works */}
+          </div>
+        </section>
 
         <section className={styles.about}>
-          {aboutContent.map((about: Content, i: number) => {
+          {cta2.map((about, i: number) => {
             return (
               <div key={i} className={styles.wrapper}>
                 <div>{about.text}</div>
                 <div>
-                  <Image 
-                    src={about.imgSrc} 
-                    alt={about.imgAlt} 
+                  <Image
+                    src={about.imgSrc}
+                    alt={about.imgAlt}
                     width={100}
                     height={100}
                   />

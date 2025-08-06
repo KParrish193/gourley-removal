@@ -4,7 +4,7 @@ export default function Contact() {
     return (
         <div className={styles.page}>
             <section>
-                <div className={styles.heroCTA}>
+                <div className={styles.form}>
 
                 </div>
             </section>
