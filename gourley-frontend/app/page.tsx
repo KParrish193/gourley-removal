@@ -1,33 +1,17 @@
-import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
+import { fetchSheetData, SheetRow, Service } from "@/app/lib/gsheet";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./home.module.css";
 
-type Props = {
-  cta1: SheetRow[];
-  cta2: SheetRow[];
-  services: SheetRow[];
-};
-
-// define type structure for google content
-type Content = {
-  text: string;
-  imgSrc: string;
-  imgAlt: string;
-  link?: string;
-  linkText?: string;
-};
-
 const cta1 = await fetchSheetData("Home", "A2:F10");
 const cta2 = await fetchSheetData("Home", "J2:O10");
-const services = await fetchSheetData("Home", "H1:H10");
+// filter services data
+const servicesRows = await fetchSheetData("Home", "H1:H10");
+const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
 
 export const revalidate = 0;
 
 export default function Home() {
-
-  console.log("IT DID THE THING", services);
-
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -38,13 +22,13 @@ export default function Home() {
                 <div key={i} className={styles.wrapper}>
                   <div>
                     <div>{hero.text}</div>
-                    <Image
+                    {/* <Image
                       src={hero.imgSrc}
                       alt={hero.imgAlt}
                       width={100}
                       height={100}
                       priority
-                    />
+                    /> */}
                     {hero.link ? (
                       <Link href={hero.link}> {hero.linkText}</Link>
                     ) : (
@@ -59,12 +43,13 @@ export default function Home() {
 
         <section className={styles.services}>
           <ul>
-            {/* {services.map((service: string, i: number) => {
+            {services.map((service, i: number) => {
               return <li key={i}>{service}</li>;
-            })} */}
+            })}
           </ul>
           <div className={styles.serviceArea}>
-              {/* info about where Steve works */}
+              {/* info about service area */}
+              {/* map image? */}
           </div>
         </section>
 
@@ -74,12 +59,12 @@ export default function Home() {
               <div key={i} className={styles.wrapper}>
                 <div>{about.text}</div>
                 <div>
-                  <Image
+                  {/* <Image
                     src={about.imgSrc}
                     alt={about.imgAlt}
                     width={100}
                     height={100}
-                  />
+                  /> */}
                 </div>
               </div>
             );

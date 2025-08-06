@@ -4,10 +4,6 @@ export type SheetRow = {
   [key: string]: string;
 };
 
-export type Service = {
-  serviceName: string;
-};
-
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 
 const auth = new google.auth.JWT({
