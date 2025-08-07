@@ -9,12 +9,12 @@
   --heading-text: var(--burnt-orange);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--dark-azure);
     --foreground: var(--white);
   }
-}
+} */
 
 html,
 body {
@@ -41,8 +41,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */

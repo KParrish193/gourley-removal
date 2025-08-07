@@ -1,0 +1,83 @@
+.footer {
+    background-color: var(--dark-azure);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+}
+
+.footer > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.socials, 
+.phone {
+    display: flex;
+    align-items: center;
+}
+
+.phone > a {
+    display: flex;
+    align-items: center;
+}
+
+.phone > a:hover,
+.phone > a:hover > img {
+    filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg) brightness(91%) contrast(90%);
+}
+
+.phone > a > img {
+    display: block;
+    margin: 0 1.5rem 0 0;
+}
+
+.icon:hover {
+    filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg) brightness(91%) contrast(90%);
+}
+
+.socials > a {
+    display: block;
+    margin: 0 1rem;
+    color: var(--white);
+}
+
+.socials > a:last-of-type {
+    margin: 0 0 0 1rem;
+}
+
+.socials > a > img {
+    display: block;
+}
+
+
+@media(max-width: 414px){
+    .footer {
+        padding: 1.5rem;
+    }
+    .footer > div {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+ 
+    .phone {
+        margin-top: 1.5rem;
+    }
+
+    .phone > a > img {
+        margin: 0 0.75rem 0 0;
+    }
+
+    .socials > a {
+        margin: 0 0.75rem;
+    }
+
+    .socials > a:first-of-type {
+        margin: 0 0.75rem 0 0;
+    }
+
+        .socials > a:last-of-type {
+        margin: 0 0 0 0.75rem;
+    }
+}

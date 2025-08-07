@@ -1,10 +1,11 @@
-import { fetchSheetData, SheetRow, Service } from "@/app/lib/gsheet";
+import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./home.module.css";
+import styles from "./page.module.css";
 
 const cta1 = await fetchSheetData("Home", "A2:F10");
 const cta2 = await fetchSheetData("Home", "J2:O10");
+
 // filter services data
 const servicesRows = await fetchSheetData("Home", "H1:H10");
 const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
@@ -29,8 +30,9 @@ export default function Home() {
                       height={100}
                       priority
                     /> */}
+
                     {hero.link ? (
-                      <Link href={hero.link}> {hero.linkText}</Link>
+                      <a href={hero.link}> {hero.linkText}</a>
                     ) : (
                       <Link href="/contact">Contact Us</Link>
                     )}

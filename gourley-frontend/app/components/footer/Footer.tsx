@@ -1,24 +1,34 @@
 import Image from "next/image";
+import styles from "./footer.module.css";
 
 export default function Footer() {
     return (
-      <footer>
+      <footer className={styles.footer}>
         <div>
-          <p>
-            Follow us!
+          <div className={styles.phone}>
+            <a href={"tel:808-765-4547"} target="_blank">
+              <Image
+                src={"/phone.svg"}
+                alt={"phone icon"}
+                width={30}
+                height={30}
+              />
+              (808) 765-4547
+            </a>
+          </div>
+          <div className={styles.socials}>
             <a
               href={"https://www.instagram.com/gourley_tree_removal/"}
               target="_blank"
             >
               <Image
+                className={styles.icon}
                 src={"/insta.svg"}
                 alt={"instagram icon"}
-                width={25}
-                height={25}
+                width={28}
+                height={28}
               />
             </a>
-          </p>
-          <p>
             <a
               href={
                 "https://www.yelp.com/biz/gourley-tree-removal-kailua-kona?override_cta=Get+a+quote"
@@ -26,26 +36,26 @@ export default function Footer() {
               target="_blank"
             >
               <Image
+                className={styles.icon}
                 src={"/yelp.svg"}
                 alt={"yelp icon"}
                 width={25}
                 height={25}
               />
             </a>
-          </p>
-          <p>
             <a
               href={"https://maps.app.goo.gl/xnWwKYDE9U2dWPkV8"}
               target="_blank"
             >
               <Image
+                className={styles.icon}
                 src={"/google-maps.svg"}
                 alt={"google maps icon"}
                 width={25}
                 height={25}
               />
             </a>
-          </p>
+          </div>
         </div>
       </footer>
     );
