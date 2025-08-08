@@ -1,12 +1,15 @@
 :root {
   --dark-azure: #142F42;
   --burnt-orange: #DD5339;
-  --hi-viz-lime: #B6F16A;
+  --vivid-lime: #B6F16A;
   --white: #FEFEFE;
   --background: var(--white);
   --foreground: var(--dark-azure);
   --body-text: var(--white);
   --heading-text: var(--burnt-orange);
+  --font-body: var(--font-source-code-pro);
+  --font-heading: var(--font-inter);
+  
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -25,7 +28,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -46,3 +49,26 @@ a {
     color-scheme: dark;
   }
 } */
+
+a.button {
+  display: block;
+  padding: 0.5rem 2.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  font-family: var(--font-inter);
+  letter-spacing: -1.3px;
+  font-weight: 600;
+}
+
+a.button:hover {
+  background-color: var(--dark-azure);
+  transition: all 0.2 ease;
+}
+
+@media(max-width: 414px){
+  a.button {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.5rem;
+  }
+}

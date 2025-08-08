@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-const cta1 = await fetchSheetData("Home", "A2:F10");
+const heroContent = await fetchSheetData("Home", "A2:F10");
+const aboutContent = await fetchSheetData("Home", "A2:F10");
 const cta2 = await fetchSheetData("Home", "J2:O10");
 
 // filter services data
@@ -17,45 +18,48 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <section>
-          <div className={styles.heroCTA}>
-            {cta1.map((hero, i: number) => {
-              return (
-                <div key={i} className={styles.wrapper}>
-                  <div>
-                    <div>{hero.text}</div>
-                    {/* <Image
+          <div className={styles.heroCTA}></div>
+        </section>
+
+        <section className={styles.services}>
+          <div>
+            <h3>Services</h3>
+            <ul>
+              {services.map((service, i: number) => {
+                return <li key={i}>{service}</li>;
+              })}
+            </ul>
+          </div>
+          <div className={styles.serviceArea}>
+            {/* info about service area */}
+            <Image
+              src={"/servicemap.png"}
+              alt={"map of hawaii"}
+              width={500}
+              height={500}
+              priority
+            />
+          </div>
+        </section>
+
+        <section className={styles.about}>
+          <h3>About</h3>
+          {aboutContent.map((about, i: number) => {
+            return (
+              <div key={i} className={styles.wrapper}>
+                <div>
+                  <div>{about.text}</div>
+                  {/* <Image
                       src={hero.imgSrc}
                       alt={hero.imgAlt}
                       width={100}
                       height={100}
                       priority
                     /> */}
-
-                    {hero.link ? (
-                      <a href={hero.link}> {hero.linkText}</a>
-                    ) : (
-                      <Link href="/contact">Contact Us</Link>
-                    )}
-                  </div>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className={styles.services}>
-          <ul>
-            {services.map((service, i: number) => {
-              return <li key={i}>{service}</li>;
-            })}
-          </ul>
-          <div className={styles.serviceArea}>
-              {/* info about service area */}
-              {/* map image? */}
-          </div>
-        </section>
-
-        <section className={styles.about}>
+              </div>
+            );
+          })}
           {cta2.map((about, i: number) => {
             return (
               <div key={i} className={styles.wrapper}>

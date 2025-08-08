@@ -21,6 +21,8 @@
 .phone > a {
     display: flex;
     align-items: center;
+    font-family: var(--font-source-code-pro);
+    font-weight: 700;
 }
 
 .phone > a:hover,
