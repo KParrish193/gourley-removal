@@ -1,85 +1,86 @@
 .footer {
-    background-color: var(--dark-azure);
-    color: var(--white);
-    padding: 0.75rem 1.5rem;
+  background-color: var(--dark-azure);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
 }
 
 .footer > div {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  max-width: var(--fullhd);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.socials, 
+.socials,
 .phone {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .phone > a {
-    display: flex;
-    align-items: center;
-    font-family: var(--font-source-code-pro);
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-source-code-pro);
+  font-weight: 700;
 }
 
 .phone > a:hover,
 .phone > a:hover > img {
-    filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg) brightness(91%) contrast(90%);
+  filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg)
+    brightness(91%) contrast(90%);
 }
 
 .phone > a > img {
-    display: block;
-    margin: 0 1.5rem 0 0;
+  display: block;
+  margin: 0 0.5rem 0 0;
 }
 
 .icon:hover {
-    filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg) brightness(91%) contrast(90%);
+  filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg)
+    brightness(91%) contrast(90%);
 }
 
 .socials > a {
-    display: block;
-    margin: 0 1rem;
-    color: var(--white);
+  display: block;
+  margin: 0 1rem;
+  color: var(--white);
 }
 
 .socials > a:last-of-type {
-    margin: 0 0 0 1rem;
+  margin: 0 0 0 1rem;
 }
 
 .socials > a > img {
-    display: block;
+  display: block;
 }
 
+@media (max-width: 414px) {
+  .footer {
+    padding: 1.5rem;
+  }
+  .footer > div {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 
-@media(max-width: 414px){
-    .footer {
-        padding: 1.5rem;
-    }
-    .footer > div {
-        flex-direction: column-reverse;
-        align-items: center;
-    }
- 
-    .phone {
-        margin-top: 1.5rem;
-    }
+  .phone {
+    margin-top: 1.5rem;
+  }
 
-    .phone > a > img {
-        margin: 0 0.75rem 0 0;
-    }
+  .phone > a > img {
+    margin: 0 0.75rem 0 0;
+  }
 
-    .socials > a {
-        margin: 0 0.75rem;
-    }
+  .socials > a {
+    margin: 0 0.75rem;
+  }
 
-    .socials > a:first-of-type {
-        margin: 0 0.75rem 0 0;
-    }
+  .socials > a:first-of-type {
+    margin: 0 0.75rem 0 0;
+  }
 
-        .socials > a:last-of-type {
-        margin: 0 0 0 0.75rem;
-    }
+  .socials > a:last-of-type {
+    margin: 0 0 0 0.75rem;
+  }
 }

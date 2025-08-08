@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en-US" className={`${inter.variable} ${sourceCodePro.variable}`}>
       <body>
         <Header />
-        <main>{children}</main>
+          {children}
         <Footer />
       </body>
     </html>
