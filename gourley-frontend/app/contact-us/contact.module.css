@@ -1,0 +1,106 @@
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100svh - 54px);
+    padding: 75px 1.5rem 0;
+}
+
+.main {
+    width: 100%;
+    max-width: var(--fullhd);
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
+
+}
+
+.desktopWrapper {
+    max-width: var(--fullhd);
+}
+
+.desktopImg {
+    display: none;
+}
+
+@media(min-width: 1080px) {
+    .desktopImg {
+        display: block;
+    }
+
+    .desktopImg > img {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+    }
+}
+
+.formWrapper {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 0 0 3rem;
+}
+
+@media(max-width: 1080px) {
+    .formWrapper {
+        padding: 0;
+    }
+}
+
+.formWrapper > h1,
+.formWrapper > form {
+    max-width: var(--desktop);
+    margin: 0 auto;
+}
+
+.formWrapper > h1 {
+    margin-bottom: 0.75rem;
+}
+
+.formRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.formRow > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin-bottom: 0.75rem;
+}
+
+.formRow.fullWidth > div {
+    width: 100%;
+}
+
+.formRow > div > label {
+    font-family: var(--font-inter);
+    letter-spacing: -1.2px;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.formRow > div > input,
+.formRow > div > select,
+.formRow > div > textarea {
+    width: 100%;
+    border-radius: 6px;
+    border: solid 1px var(--dark-azure);
+    color: var(--dark-azure);
+    font-family: var(--font-source-code-pro);
+    padding: 0.5rem;
+}
+
+.formRow > div > textarea {
+    min-height: 350px;
+}
+
+.formRow > div > input:focus,
+.formRow > div > select:focus,
+.formRow > div > textarea:focus {
+    outline-color: var(--vivid-lime);
+    outline-offset: 4px;    
+}

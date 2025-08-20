@@ -1,4 +1,4 @@
-import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
+import { fetchSheetData } from "@/app/lib/gsheet";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -13,7 +13,6 @@ const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
 
 const locationDetails = await fetchSheetData("Home", "I1:I10");
 const location = locationDetails.map((row) => row["Service Location"]).filter(Boolean);
-
 
 export const revalidate = 0;
 

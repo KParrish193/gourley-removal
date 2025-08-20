@@ -64,7 +64,7 @@ a:hover {
   }
 } */
 
-a.button-primary {
+.button-primary {
   display: block;
   padding: 0.5rem 2.5rem;
   border-radius: 1.25rem;
@@ -73,17 +73,74 @@ a.button-primary {
   font-family: var(--font-inter);
   letter-spacing: -1.3px;
   font-weight: 600;
+  font-size: 1rem;
   max-width: fit-content;
+  border: none;
 }
 
-a.button-primary:hover {
+.button-primary:hover {
   background-color: var(--dark-azure);
   transition: all 0.2 ease;
+  cursor: pointer;
 }
 
 @media(max-width: 414px){
-  a.button {
+  .button-primary {
     font-size: 0.85rem;
     padding: 0.5rem 1.5rem;
+  }
+}
+
+.arrow-button {
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+  padding-right: calc(2.5rem + 10px);
+}
+
+.arrow-button img {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+}
+
+@keyframes diagonal-up {
+  0% {
+    transform: translateX(1) translateY(1);
+  }
+  18% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  40% {
+    transform: translateX(8px) translateY(-18px);
+  }
+  41% {
+    transform: translateX(-25px) translateY(20px);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1) translateY(1);
+  }
+}
+
+.arrow-button:hover img {
+  animation: diagonal-up 0.5s cubic-bezier(0.82, 0.14, 0.23, 0.885);
+  filter: brightness(0) saturate(100%) invert(99%) sepia(33%) saturate(2481%) hue-rotate(21deg) brightness(96%) contrast(88%);
+}
+
+@media (max-width: 414px) {
+  .arrow-button {
+    padding-right: calc(1.5rem + 10px);
+  }
+
+  .arrow-button img {
+    right: 16px;
   }
 }

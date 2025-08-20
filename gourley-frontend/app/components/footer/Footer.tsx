@@ -8,7 +8,7 @@ export default function Footer() {
           <div className={styles.phone}>
             <a href={"tel:808-765-4547"} target="_blank">
               <Image
-                src={"/phone.svg"}
+                src={"/icons/phone.svg"}
                 alt={"phone icon"}
                 width={30}
                 height={30}
@@ -23,7 +23,7 @@ export default function Footer() {
             >
               <Image
                 className={styles.icon}
-                src={"/insta.svg"}
+                src={"/icons/insta.svg"}
                 alt={"instagram icon"}
                 width={28}
                 height={28}
@@ -37,7 +37,7 @@ export default function Footer() {
             >
               <Image
                 className={styles.icon}
-                src={"/yelp.svg"}
+                src={"/icons/yelp.svg"}
                 alt={"yelp icon"}
                 width={25}
                 height={25}
@@ -49,7 +49,7 @@ export default function Footer() {
             >
               <Image
                 className={styles.icon}
-                src={"/google-maps.svg"}
+                src={"/icons/google-maps.svg"}
                 alt={"google maps icon"}
                 width={25}
                 height={25}

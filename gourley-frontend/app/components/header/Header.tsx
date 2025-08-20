@@ -52,10 +52,10 @@ export default function Header() {
         </Link>
 
         {/* cta button */}
-        <Link className={`button-primary ${styles.arrowButton}`} href="/contact-us">
+        <Link className={`button-primary arrow-button`} href="/contact-us">
           Contact Us
           <Image
-            src={"/arrow.svg"}
+            src={"/icons/arrow.svg"}
             alt={"arrow"}
             width={10}
             height={10}

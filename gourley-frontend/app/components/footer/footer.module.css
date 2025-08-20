@@ -25,10 +25,12 @@
   font-weight: 700;
 }
 
-.phone > a:hover,
+.phone > a:hover {
+  color: var(--vivid-lime);
+}
+
 .phone > a:hover > img {
-  filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg)
-    brightness(91%) contrast(90%);
+filter: brightness(0) saturate(100%) invert(99%) sepia(33%) saturate(2481%) hue-rotate(21deg) brightness(96%) contrast(88%);
 }
 
 .phone > a > img {
@@ -37,8 +39,7 @@
 }
 
 .icon:hover {
-  filter: invert(45%) sepia(39%) saturate(4016%) hue-rotate(339deg)
-    brightness(91%) contrast(90%);
+  filter: brightness(0) saturate(100%) invert(99%) sepia(33%) saturate(2481%) hue-rotate(21deg) brightness(96%) contrast(88%);
 }
 
 .socials > a {
