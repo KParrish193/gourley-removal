@@ -42,9 +42,9 @@ export default function Header() {
     <header ref={headerRef} className={styles.header}>
       <div className={styles.headerWrapper}>
         {/* logo */}
-        <Link href="/">
+        <Link href="/" className={styles.logo}>
           <Image
-            src={"/logo.png"}
+            src={"/logo/logo.png"}
             alt={"gourley logo"}
             width={157}
             height={70}

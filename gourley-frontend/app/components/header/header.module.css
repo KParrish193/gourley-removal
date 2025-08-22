@@ -24,9 +24,14 @@
   height: 100%;
 }
 
-.header > .headerWrapper a:not(.arrowButton) img {
+.header > .headerWrapper a.logo img {
   display: block;
   margin-top: 2px;
+}
+
+.header > .headerWrapper a.logo:hover {
+  scale: 104%;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .header > .headerWrapper a {
@@ -34,7 +39,7 @@
 }
 
 @media (max-width: 414px) {
-  .header > .headerWrapper a:not(.arrowButton) img {
+  .header > .headerWrapper a.logo img {
     width: 120px;
     height: auto;
   }

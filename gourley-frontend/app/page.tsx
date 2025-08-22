@@ -5,8 +5,6 @@ import styles from "./page.module.css";
 
 const heroContent = await fetchSheetData("Home", "A2:F10");
 const aboutContent = await fetchSheetData("Home", "K2:N10");
-const cta2 = await fetchSheetData("Home", "J2:O10");
-
 // filter services data
 const servicesRows = await fetchSheetData("Home", "H1:H10");
 const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
@@ -21,30 +19,41 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <section className={styles.hero}>
-          {heroContent.map((hero, i: number) => {
-            return (
-              <div key={i} className={styles.wrapper}>
-                {hero.heading ? <h1>{hero.heading}</h1> : null}
-                {hero.subheading ? <h3>{hero.subheading}</h3> : null}
-                {/* <Image
-                  src={`${hero.image_url}`}
-                  alt={`${hero.image_alt}`}
-                  width={1080}
-                  height={720}
-                  priority
-                /> */}
-                {hero.link ? (
-                  <a className="button-primary" href={hero.link}>
-                    {hero.link_text}
-                  </a>
-                ) : (
-                  <Link className="button-primary" href={"/contact-us"}>
-                    Contact Us
-                  </Link>
-                )}
-              </div>
-            );
-          })}
+          <div className={styles.heroBackground}>
+            {heroContent.map((hero, i: number) => {
+              return (
+                <div key={i} className={styles.heroPanel}>
+                  <div className={styles.heroContent}>
+                    {hero.heading ? <h1>{hero.heading}</h1> : null}
+                    {hero.subheading ? <h3>{hero.subheading}</h3> : null}
+
+                    {hero.link ? (
+                      <a className="button-primary" href={hero.link}>
+                        {hero.link_text}
+                      </a>
+                    ) : (
+                      <Link className="button-primary" href={"/contact-us"}>
+                        Contact Us
+                      </Link>
+                    )}
+                  </div>
+                  {hero.visual_path.includes('/videos') ?
+                  <video
+                    src={`${hero.visual_path}`}>
+                  </video>
+                  :
+                  <Image
+                    src={`${hero.visual_path}`}
+                    alt={`${hero.visual_alt}`}
+                    width={1080}
+                    height={720}
+                    priority
+                  />
+                  }
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         <section className={styles.services}>
@@ -96,17 +105,23 @@ export default function Home() {
             return (
               <div key={i} className={styles.fiftyFifty}>
                 <div>
-                  {about.subheading ? <h3></h3> : null}
+                  {about.subheading ? <h3>{about.subheading}</h3> : null}
                   <div>{about.text}</div>
                 </div>
                 <div>
-                  <Image
-                    src={`${about.image_url}`}
-                    alt={`${about.image_alt}`}
-                    width={500}
-                    height={500}
-                    priority
-                  />
+                  {about.visual_path.includes("/videos") ? (
+                    <video autoPlay muted playsInline loop>
+                      <source src={`${about.visual_path}`} type="video/mp4" />
+                      Your browser does not support video playback.
+                    </video>
+                  ) : (
+                    <Image
+                      src={`${about.visual_path}`}
+                      alt={`${about.visual_alt}`}
+                      width={500}
+                      height={500}
+                    />
+                  )}
                 </div>
               </div>
             );
