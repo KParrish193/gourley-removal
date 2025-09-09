@@ -30,7 +30,7 @@ export default function Contact() {
       loadServices();
   }, []);
   
-  // form
+  // initiate form state
   const [form, setForm] = useState<FormData>({
     timestamp: new Date().toISOString(),
     firstName: "",

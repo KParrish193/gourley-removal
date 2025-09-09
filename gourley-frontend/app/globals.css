@@ -77,13 +77,14 @@ a:hover {
   font-weight: 600;
   font-size: 1rem;
   max-width: fit-content;
-  border: none;
+  border: solid 1.5px transparent;
 }
 
 .button-primary:hover {
   background-color: var(--dark-azure);
   transition: all 0.2 ease;
   cursor: pointer;
+  border: solid 1.5px var(--vivid-lime);
 }
 
 @media(max-width: 414px){
