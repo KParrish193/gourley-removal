@@ -1,5 +1,7 @@
 :root {
   --dark-azure: #142F42;
+  --dark-azure-80: rgb(20, 47, 66, 0.8);
+  --dark-azure-40: rgb(20, 47, 66, 0.4);
   --burnt-orange: #DD5339;
   --vivid-lime: #B6F16A;
   --white: #FEFEFE;

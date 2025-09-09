@@ -3,10 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./header.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -31,6 +32,12 @@ export default function Header() {
         headerRef.current.style.top = "0px";
       }
 
+      // if (window.scrollY > window.innerHeight - 80) {
+      //   setScrolled(true);
+      // } else {
+      //   setScrolled(false);
+      // }
+
       prevScrollPos = currentScrollPos;
     };
 
@@ -39,7 +46,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className={styles.header}>
+    <header
+      ref={headerRef}
+      className={`${styles.header} ${scrolled ? styles.body : ""}`}>
       <div className={styles.headerWrapper}>
         {/* logo */}
         <Link href="/" className={styles.logo}>

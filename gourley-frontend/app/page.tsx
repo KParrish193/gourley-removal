@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 
 const heroContent = await fetchSheetData("Home", "A2:F10");
 const aboutContent = await fetchSheetData("Home", "K2:N10");
+
 // filter services data
 const servicesRows = await fetchSheetData("Home", "H1:H10");
 const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
@@ -23,6 +24,19 @@ export default function Home() {
             {heroContent.map((hero, i: number) => {
               return (
                 <div key={i} className={styles.heroPanel}>
+                  <div className={styles.heroVisual}>
+                    {hero.visual_path.includes("/videos") ? (
+                      <video src={`${hero.visual_path}`}></video>
+                    ) : (
+                      <Image
+                        src={`${hero.visual_path}`}
+                        alt={`${hero.visual_alt}`}
+                        width={1024}
+                        height={2032}
+                        priority
+                      />
+                    )}
+                  </div>
                   <div className={styles.heroContent}>
                     {hero.heading ? <h1>{hero.heading}</h1> : null}
                     {hero.subheading ? <h3>{hero.subheading}</h3> : null}
@@ -37,62 +51,48 @@ export default function Home() {
                       </Link>
                     )}
                   </div>
-                  {hero.visual_path.includes('/videos') ?
-                  <video
-                    src={`${hero.visual_path}`}>
-                  </video>
-                  :
-                  <Image
-                    src={`${hero.visual_path}`}
-                    alt={`${hero.visual_alt}`}
-                    width={1080}
-                    height={720}
-                    priority
-                  />
-                  }
                 </div>
               );
             })}
           </div>
         </section>
 
-        <section className={styles.services}>
-          <div className={styles.fiftyFifty}>
+        <section className={styles.serviceInfo}>
+          <div className={styles.serviceArea}>
             <div>
-              <h3>What We Do</h3>
-              <ul>
-                {services.map((service, i: number) => {
-                  return (
-                    <li key={i}>
-                      <Image
-                        src={"/filledlog.png"}
-                        alt={"log icon"}
-                        width={25}
-                        height={25}
-                      />
-                      {service}
-                    </li>
-                  );
-                })}
-              </ul>
-              <Link className="button-primary" href={"/contact-us"}>
-                Get an Estimate
-              </Link>
-            </div>
-
-            <div className={styles.serviceArea}>
               <h3>Where We Work</h3>
               {location.map((loc, i: number) => {
                 return <p key={i}>{loc}</p>;
               })}
-              <Image
-                src={"/servicemap.png"}
-                alt={"map of hawaii"}
-                width={500}
-                height={500}
-                priority
-              />
             </div>
+            <Image
+              src={"/map/servicemap.png"}
+              alt={"map of hawaii"}
+              width={500}
+              height={500}
+              priority
+            />
+          </div>
+          <div className={styles.servicesList}>
+            <h3>What We Offer</h3>
+            <ul>
+              {services.map((service, i: number) => {
+                return (
+                  <li key={i}>
+                    <Image
+                      src={"/icons/filledlog.png"}
+                      alt={"log icon"}
+                      width={25}
+                      height={25}
+                    />
+                    {service}
+                  </li>
+                );
+              })}
+            </ul>
+            <Link className="button-primary" href={"/contact-us"}>
+              Get an Estimate
+            </Link>
           </div>
         </section>
 
@@ -110,17 +110,21 @@ export default function Home() {
                 </div>
                 <div>
                   {about.visual_path.includes("/videos") ? (
-                    <video autoPlay muted playsInline loop>
-                      <source src={`${about.visual_path}`} type="video/mp4" />
-                      Your browser does not support video playback.
-                    </video>
+                    <div className={styles.visualWrapper}>
+                      <video autoPlay muted playsInline loop>
+                        <source src={`${about.visual_path}`} type="video/mp4" />
+                        Your browser does not support video playback.
+                      </video>
+                    </div>
                   ) : (
-                    <Image
-                      src={`${about.visual_path}`}
-                      alt={`${about.visual_alt}`}
-                      width={500}
-                      height={500}
-                    />
+                    <div className={styles.visualWrapper}>
+                      <Image
+                        src={`${about.visual_path}`}
+                        alt={`${about.visual_alt}`}
+                        width={500}
+                        height={500}
+                      />
+                    </div>
                   )}
                 </div>
               </div>

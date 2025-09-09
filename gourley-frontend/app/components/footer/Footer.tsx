@@ -5,6 +5,7 @@ export default function Footer() {
     return (
       <footer className={styles.footer}>
         <div>
+          {/* left */}
           <div className={styles.phone}>
             <a href={"tel:808-765-4547"} target="_blank">
               <Image
@@ -16,6 +17,8 @@ export default function Footer() {
               (808) 765-4547
             </a>
           </div>
+          <p className={styles.copyright}>&copy;Copyright Gourley Tree Removal LLC 2025</p>
+          {/* right */}
           <div className={styles.socials}>
             <a
               href={"https://www.instagram.com/gourley_tree_removal/"}

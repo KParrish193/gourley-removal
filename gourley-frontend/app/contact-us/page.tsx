@@ -107,12 +107,16 @@ export default function Contact() {
     <div className={styles.page}>
       <main className={styles.main}>
         <div className={styles.desktopImg}>
-          <Image
+          {/* <Image
             src={"/o.jpg"}
             alt={"man in orange shirt cutting tree"}
             width={500}
             height={500}
-          />
+          /> */}
+          <video autoPlay muted playsInline loop>
+            <source src="/videos/IMG_5346.mp4" type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
         </div>
         <div className={styles.formWrapper}>
           <h1>How Can We Help You?</h1>
