@@ -1,17 +1,22 @@
 .header {
   width: 100%;
   position: fixed;
-  background-color: var(--white);
+  background-color: transparent;
   top: 0;
   left: 0;
   z-index: 1000;
-  transition: top 0.4s cubic-bezier(0.82, 0.14, 0.23, 0.885);
+  transition: top 0.4s cubic-bezier(0.82, 0.14, 0.23, 0.885), background-color 0.3s ease, box-shadow 0.3s ease;
   padding: 0 1.5rem;
   min-height: 75px;
   max-height: 75px;
   border-bottom: solid 1px var(--dark-azure);
   display: flex;
   align-items: center;
+}
+
+.header.body {
+  background-color: var(--white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header > .headerWrapper {
@@ -24,9 +29,14 @@
   height: 100%;
 }
 
-.header > .headerWrapper a:not(.arrowButton) img {
+.header > .headerWrapper a.logo img {
   display: block;
   margin-top: 2px;
+}
+
+.header > .headerWrapper a.logo:hover {
+  scale: 104%;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .header > .headerWrapper a {
@@ -34,7 +44,7 @@
 }
 
 @media (max-width: 414px) {
-  .header > .headerWrapper a:not(.arrowButton) img {
+  .header > .headerWrapper a.logo img {
     width: 120px;
     height: auto;
   }

@@ -1,5 +1,6 @@
+// server-side for fetching services from google sheet
 import { fetchSheetData } from "../../lib/gsheet"; // server-side helper
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {

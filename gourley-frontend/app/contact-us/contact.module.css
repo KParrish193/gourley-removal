@@ -11,8 +11,7 @@
     max-width: var(--fullhd);
     display: flex;
     justify-content: center;
-    align-items: space-around;
-
+    align-items: center;
 }
 
 .desktopWrapper {
@@ -26,24 +25,31 @@
 @media(min-width: 1080px) {
     .desktopImg {
         display: block;
+        max-width: 600px;
+        max-height: 600px;
+        min-width: 600px;
+        overflow: hidden;
     }
 
-    .desktopImg > img {
+    .desktopImg > img,
+    .desktopImg > video {
         display: block;
         object-fit: cover;
         height: 100%;
+        width: 100%;
+        object-position: 100% 0;
     }
 }
 
 .formWrapper {
     width: 100%;
     max-width: 1000px;
-    padding: 0 0 0 3rem;
+    padding: 1rem 0 1rem 3rem;
 }
 
 @media(max-width: 1080px) {
     .formWrapper {
-        padding: 0;
+        padding: 1rem 0;
     }
 }
 
@@ -103,4 +109,9 @@
 .formRow > div > textarea:focus {
     outline-color: var(--vivid-lime);
     outline-offset: 4px;    
+}
+
+.error {
+    color: var(--burnt-orange);
+    font-size: 0.85rem;
 }

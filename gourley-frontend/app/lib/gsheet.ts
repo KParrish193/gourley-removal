@@ -5,7 +5,7 @@ export type SheetRow = {
 };
 
 const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-const privateKey =  process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
 const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 
@@ -21,12 +21,11 @@ export async function fetchSheetData(
   tabName: string,
   range: string
 ): Promise<SheetRow[]> {
-
   if (!spreadsheetId) {
-    throw new Error('Missing GOOGLE_SHEET_ID env variable');
+    throw new Error("Missing GOOGLE_SHEET_ID env variable");
   }
 
-  const tabRange = `${tabName}!${range}`
+  const tabRange = `${tabName}!${range}`;
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId,
     range: tabRange,
