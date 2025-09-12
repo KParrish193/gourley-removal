@@ -44,12 +44,12 @@
 .formWrapper {
     width: 100%;
     max-width: 1000px;
-    padding: 0 0 0 3rem;
+    padding: 1rem 0 1rem 3rem;
 }
 
 @media(max-width: 1080px) {
     .formWrapper {
-        padding: 0;
+        padding: 1rem 0;
     }
 }
 
@@ -109,4 +109,9 @@
 .formRow > div > textarea:focus {
     outline-color: var(--vivid-lime);
     outline-offset: 4px;    
+}
+
+.error {
+    color: var(--burnt-orange);
+    font-size: 0.85rem;
 }

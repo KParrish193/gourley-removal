@@ -25,27 +25,29 @@ export async function POST(req: Request) {
 
   // Step 1: Append data to Google Sheets
   try { 
-  const sheets = google.sheets({ version: "v4", auth });
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-    range: "Contact!A:G",
-    valueInputOption: "USER_ENTERED",
-    requestBody: {
-      values: [[
-          new Date().toLocaleString(),
-          body.firstName,
-          body.lastName,
-          body.phone,
-          body.email,
-          body.jobType,
-          body.description,
-      ]],
-    },
-  });
+    const sheets = google.sheets({ version: "v4", auth });
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+      range: "Contact!A:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [[
+            new Date().toLocaleString(),
+            body.firstName,
+            body.lastName,
+            body.phone,
+            body.email,
+            body.jobType,
+            body.description,
+        ]],
+      },
+    });
 
     sheetStatus = `success`;
+    console.log("Sheet append success");
   } catch (err: any) {
     sheetStatus = `error: ${err.message}`;
+    console.error("Sheet append error:", err);
   }
 
   //Step 2: Send email with Resend
@@ -63,8 +65,10 @@ export async function POST(req: Request) {
       throw new Error(error.message);
     }
     emailStatus = "success";
+    console.log("Email sent successfully");
   } catch (err: any) {
     emailStatus = `error: ${err.message}`;
+    console.error("Email send error:", err);
   }
 
   return NextResponse.json({

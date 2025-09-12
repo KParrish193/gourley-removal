@@ -1,6 +1,6 @@
 :root {
   --dark-azure: #142F42;
-  --dark-azure-80: rgb(20, 47, 66, 0.8);
+  --dark-azure-60: rgb(20, 47, 66, 0.6);
   --dark-azure-40: rgb(20, 47, 66, 0.4);
   --burnt-orange: #DD5339;
   --vivid-lime: #B6F16A;
@@ -87,8 +87,29 @@ a:hover {
   border: solid 1.5px var(--vivid-lime);
 }
 
+.button-secondary {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--white);
+  color: var(--dark-azure);
+  font-family: var(--font-inter);
+  letter-spacing: -1.3px;
+  font-weight: 600;
+  font-size: 1rem;
+  max-width: fit-content;
+  border: solid 1.5px var(--dark-azure);
+}
+
+.button-secondary:hover {
+  transition: all 0.2 ease;
+  cursor: pointer;
+  border: solid 2.2px var(--dark-azure);
+}
+
 @media(max-width: 414px){
-  .button-primary {
+  .button-primary,
+  .button-secondary {
     font-size: 0.85rem;
     padding: 0.5rem 1.5rem;
   }
