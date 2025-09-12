@@ -1,92 +1,75 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    type: process.env.GOOGLE_TYPE,
+    project_id: process.env.GOOGLE_PROJECT_ID,
+    private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    universe_domain: process.env.GOOGLE_UNIVERSE_DOMAIN,
+  },
+  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+});
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
+    
+  const body = await req.json();
+  let sheetStatus = `pending`;
+  let emailStatus = "pending";
 
-    // Setup OAuth2 client
-    const oAuth2Client = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET,
-      process.env.GOOGLE_REDIRECT_URI
-    );
-    oAuth2Client.setCredentials({
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-    });
+  // Step 1: Append data to Google Sheets
+  try { 
+  const sheets = google.sheets({ version: "v4", auth });
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+    range: "Contact!A:G",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[
+          new Date().toLocaleString(),
+          body.firstName,
+          body.lastName,
+          body.phone,
+          body.email,
+          body.jobType,
+          body.description,
+      ]],
+    },
+  });
 
-    // Step 1: Append data to Google Sheets
-    const sheets = google.sheets({ version: "v4", auth: oAuth2Client });
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Contact!A:G",
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          [
-            new Date().toLocaleString(),
-            body.firstName,
-            body.lastName,
-            body.phone,
-            body.email,
-            body.jobType,
-            body.description,
-          ],
-        ],
-      },
-    });
-
-    //Step 2: Send email via Gmail API
-    const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
-    const rawMessage = createEmail(
-      process.env.EMAIL_FROM!,
-      process.env.EMAIL_TO!,
-      "New Contact Form Submission",
-      `
-      New form submission:
-
-      Name: ${body.firstName} ${body.lastName}
-      Phone: ${body.phone}
-      Email: ${body.email}
-      Job Type: ${body.jobType}
-      Description:
-      ${body.description}
-      `
-    );
-
-    await gmail.users.messages.send({
-      userId: "me",
-      requestBody: { raw: rawMessage },
-    });
-
-    return NextResponse.json({ message: "Form submitted successfully" });
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    return NextResponse.json(
-      { error: "Failed to submit form" },
-      { status: 500 }
-    );
+    sheetStatus = `success`;
+  } catch (err: any) {
+    sheetStatus = `error: ${err.message}`;
   }
-}
 
-// Helper to encode email
-function createEmail(
-  from: string,
-  to: string,
-  subject: string,
-  message: string
-) {
-  const email = [
-    `From: ${from}`,
-    `To: ${to}`,
-    `Subject: ${subject}`,
-    "",
-    message,
-  ].join("\n");
+  //Step 2: Send email with Resend
+  try {
+    const emailFrom =  process.env.EMAIL_FROM;
+    const emailTo =  process.env.EMAIL_TO
+    const { error } = await resend.emails.send({
+      from: `Gourley Tree Removal Site <${emailFrom}>`,
+      to: `${emailTo}`,
+      subject: "New Contact Form Submission",
+      text: `New submission:\n\n${JSON.stringify(body, null, 2)}`,
+    });
 
-  return Buffer.from(email)
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
+    if (error) {
+      throw new Error(error.message);
+    }
+    emailStatus = "success";
+  } catch (err: any) {
+    emailStatus = `error: ${err.message}`;
+  }
+
+  return NextResponse.json({
+    ok: sheetStatus === "success" && emailStatus === "success",
+    sheetStatus,
+    emailStatus,
+  });
 }
