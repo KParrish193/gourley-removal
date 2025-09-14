@@ -3,8 +3,7 @@ Welcome to Gourley Tree Removal Services LLC's marketing site!
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), that also uses Resend and GoogleSheets to manage content and form submisions.
 
 ## Getting Started
-
-First, run the development server:
+CD into 'gourley-frontend' then run the development server:
 
 ```bash
 npm run dev
