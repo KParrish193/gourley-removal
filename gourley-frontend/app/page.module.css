@@ -29,65 +29,58 @@ section.hero {
   padding: 0;
   position: relative;
 }
-/* .hero {
-  height: 100svh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: visible;
-} */
-
-.heroBackground {
-  position: relative;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  padding: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--dark-azure) 0%,
-    #87ceeb 60%,
-    var(--white) 100%
-  );
-  /* background-attachment: fixed; */
-  min-height: 200svh;
-  width: 100%;
-}
 
 .heroPanel {
-  border: solid 2px lime;
   width: 100%;
   max-height: 100svh;
   position: relative;
 }
 
 .heroVisual {
-  border: solid 2px orange;
   width: 100%;
-  position: sticky;
   top: 0;
-  height: 150svh;
-  z-index: 10;
-  pointer-events: none;
-  overflow: hidden;
 }
 
 .heroVisual img,
 .heroVisual video {
   display: block;
   object-fit: cover;
-  /* width: 100%; */
-  min-height: 150svh;
+  width: 100%;
+  min-height: 100svh;
+  max-height: 100svh;
+  object-position: 0% 17%;
+  mix-blend-mode: multiply;
+}
+
+.heroContentWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgb(20, 47, 66, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
 }
 
 .heroContent {
-  background-color: var(--white);
+  color: var(--white);
+  width: var(--desktop);
 }
 
+.heroContent > h1 {
+  margin-bottom: 8px;
+  max-width: 210px;
+}
 
-
-
+.heroContent > h3 {
+  margin-bottom: 48px;
+  text-transform: none;
+  max-width: 210px;
+}
 
 
 /*? services ?*/
@@ -148,6 +141,7 @@ section.hero {
 .serviceInfo > .servicesList > div:first-of-type {
   justify-content: flex-start;
 }
+
 
 /*? about ?*/
 /* fifty fifty blocks */
@@ -218,6 +212,16 @@ section.hero {
     align-items: center;
   }
 
+  .heroPanel,
+  .heroVisual,
+  .heroVisual img,
+  .heroVisual video,
+  .heroContentWrapper {
+    max-height: 750px;
+    min-height: 750px;
+    height: 750px;
+  }
+
   .serviceInfo > .servicesList {
     margin-bottom: 0;
     max-width: 85%;
@@ -252,7 +256,7 @@ section.hero {
     align-items: center;
     gap: 48px
   }
-
+  
   .serviceInfo > .serviceArea {
     flex-direction: column;
     align-items: flex-start;
@@ -280,12 +284,18 @@ section.hero {
   .fiftyFifty,
   .fiftyFifty:nth-of-type(2n) {
     flex-direction: column;
-    gap: 24px;
+    gap: 48px;
     margin-top: 48px;
+
   }
 
   .fiftyFifty > div {
     width: 100%;
-    max-width: 100%;
+    max-width: 500px;
+  }
+  
+  .fiftyFifty div:nth-of-type(2),
+  .fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
+    justify-content: center;
   }
 }

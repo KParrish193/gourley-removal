@@ -20,23 +20,23 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <section className={styles.hero}>
-          <div className={styles.heroBackground}>
-            {heroContent.map((hero, i: number) => {
-              return (
-                <div key={i} className={styles.heroPanel}>
-                  <div className={styles.heroVisual}>
-                    {hero.visual_path.includes("/videos") ? (
-                      <video src={`${hero.visual_path}`}></video>
-                    ) : (
-                      <Image
-                        src={`${hero.visual_path}`}
-                        alt={`${hero.visual_alt}`}
-                        width={1024}
-                        height={2032}
-                        priority
-                      />
-                    )}
-                  </div>
+          {heroContent.map((hero, i: number) => {
+            return (
+              <div key={i} className={styles.heroPanel}>
+                <div className={styles.heroVisual}>
+                  {hero.visual_path.includes("/videos") ? (
+                    <video src={`${hero.visual_path}`}></video>
+                  ) : (
+                    <Image
+                      src={`${hero.visual_path}`}
+                      alt={`${hero.visual_alt}`}
+                      width={1024}
+                      height={2032}
+                      priority
+                    />
+                  )}
+                </div>
+                <div className={styles.heroContentWrapper}>
                   <div className={styles.heroContent}>
                     {hero.heading ? <h1>{hero.heading}</h1> : null}
                     {hero.subheading ? <h3>{hero.subheading}</h3> : null}
@@ -52,9 +52,9 @@ export default function Home() {
                     )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </section>
 
         <section className={styles.serviceInfo}>

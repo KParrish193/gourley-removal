@@ -175,7 +175,7 @@ export default function Contact() {
       if (!res.ok) throw new Error("Failed to submit form");
 
       setSuccess(
-        "We've received your message and will be in touch soon."
+        "Your message is on its way - we’ll get back to you shortly!"
       );
       setFormData({
         timestamp: new Date().toISOString(),

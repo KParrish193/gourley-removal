@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -16,39 +17,37 @@ export default function Header() {
     
     const handleScroll = () => {
       const currentScrollPos = Math.max(window.scrollY, 0);
-      if (!headerRef.current) return;
-
-      // Only hide if we've scrolled past the initial visible area
-      if (currentScrollPos > hideAfter) {
-        if (currentScrollPos - prevScrollPos > threshold) {
-          // scrolling down past threshold
-          headerRef.current.style.top = "-75px";
-        } else if (prevScrollPos - currentScrollPos > threshold) {
-          // scrolling up past threshold
-          headerRef.current.style.top = "0px";
-        }
+      // background color toggle
+      if (currentScrollPos > window.innerHeight - 80) {
+        setScrolled(true);
       } else {
-        // always show if we're near the top
-        headerRef.current.style.top = "0px";
+        setScrolled(false);
       }
 
-      // if (window.scrollY > window.innerHeight - 80) {
-      //   setScrolled(true);
-      // } else {
-      //   setScrolled(false);
-      // }
-
-      prevScrollPos = currentScrollPos;
+      if (!headerRef.current) return; 
+      // Only hide if we've scrolled past the initial visible area 
+      if (currentScrollPos > hideAfter) { if (currentScrollPos - prevScrollPos > threshold) { 
+        // scrolling down past threshold 
+        headerRef.current.style.top = "-75px"; } else if (prevScrollPos - currentScrollPos > threshold) { 
+          // scrolling up past threshold 
+          headerRef.current.style.top = "0px"; } } else { 
+            // always show if we're near the top 
+            headerRef.current.style.top = "0px"; } 
+      prevScrollPos = currentScrollPos; 
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       ref={headerRef}
-      className={`${styles.header} ${scrolled ? styles.body : ""}`}>
+      className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${
+        visible ? styles.visible : styles.hidden
+      }`}
+    >
       <div className={styles.headerWrapper}>
         {/* logo */}
         <Link href="/" className={styles.logo}>
