@@ -36,7 +36,7 @@ export default function Home() {
                     />
                   )}
                 </div>
-                <div className={styles.heroContentWrapper}>
+                <div className={styles.heroContent}>
                   <div className={styles.heroContent}>
                     {hero.heading ? <h1>{hero.heading}</h1> : null}
                     {hero.subheading ? <h3>{hero.subheading}</h3> : null}
