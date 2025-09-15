@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Alert from '../components/alert/alert';
 import { useState, useEffect } from "react";
-import { SheetRow } from "@/app/lib/gsheet";
 
 import styles from "./contact.module.css";
 
