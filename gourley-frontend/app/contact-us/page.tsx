@@ -25,11 +25,6 @@ interface FormErrors {
   description: string;
 }
 
-type ServiceRow = {
-  Services: string;
-  [key: string]: unknown; // optional extra fields
-};
-
 export default function Contact() {
   const [services, setServices] = useState<string[]>([]);
 
@@ -63,9 +58,9 @@ export default function Contact() {
   useEffect(() => {
     async function loadServices() {
       const res = await fetch("/api/services");
-      const data: ServiceRow[] = await res.json();
+      const data = await res.json();
       const filteredData = data
-        .map((row) => row.Services)
+        .map((row: { [x: string]: any }) => row["Services"])
         .filter(Boolean);
       setServices(filteredData);
     }
@@ -179,7 +174,9 @@ export default function Contact() {
 
       if (!res.ok) throw new Error("Failed to submit form");
 
-      setSuccess("Your message is on its way - we’ll get back to you shortly!");
+      setSuccess(
+        "Your message is on its way - we’ll get back to you shortly!"
+      );
       setFormData({
         timestamp: new Date().toISOString(),
         firstName: "",
@@ -197,12 +194,8 @@ export default function Contact() {
         jobType: "",
         description: "",
       });
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -216,7 +209,7 @@ export default function Contact() {
       <main className={styles.main}>
         <div className={styles.desktopImg}>
           <video autoPlay muted playsInline loop>
-            <source src="/timelapse.mp4" type="video/mp4" />
+            <source src="/videos/timelapse.mp4" type="video/mp4" />
             Your browser does not support video playback.
           </video>
         </div>
