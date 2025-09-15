@@ -23,14 +23,14 @@ function getSheetsClient() {
 
 export async function POST(req: Request) {
   const auth = getSheetsClient();
-    
+  const sheets = google.sheets({ version: "v4", auth });
+
   const body = await req.json();
   let sheetStatus = `pending`;
   let emailStatus = "pending";
 
   // Step 1: Append data to Google Sheets
   try { 
-    const sheets = google.sheets({ version: "v4", auth });
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
       range: "Contact!A:G",
@@ -49,41 +49,26 @@ export async function POST(req: Request) {
     });
 
     sheetStatus = `success`;
-    console.log("Sheet append success");
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      sheetStatus = `error: ${err.message}`;
-      console.error("Google Sheets POST error:", err);
-    } else {
+      sheetStatus = 
+        err instanceof Error ? `error: ${err.message}` : 
       sheetStatus = "error: unknown error";
-      console.error("Google Sheets POST error:", err);
-    }
   }
 
   //Step 2: Send email with Resend
   try {
-    const emailFrom =  process.env.EMAIL_FROM;
-    const emailTo =  process.env.EMAIL_TO
     const { error } = await resend.emails.send({
-      from: `Gourley Tree Removal Site <${emailFrom}>`,
-      to: `${emailTo}`,
+      from: `Gourley Tree Removal Site <${process.env.EMAIL_FRO}>`,
+      to: `${process.env.EMAIL_TO}`,
       subject: "New Contact Form Submission",
       text: `New submission:\n\n${JSON.stringify(body, null, 2)}`,
     });
 
-    if (error) {
-      throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
     emailStatus = "success";
-    console.log("Email sent successfully");
   } catch (err: unknown) {
-      if (err instanceof Error) {
-        emailStatus = `error: ${err.message}`;
-        console.error("Email send error:", err);
-      } else {
-        emailStatus = "error: unknown error";
-        console.error("Email send error:", err);
-      }
+    emailStatus =
+      err instanceof Error ? `error: ${err.message}` : "error: unknown error";
   }
 
   return NextResponse.json({

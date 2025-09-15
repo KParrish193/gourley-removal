@@ -26,11 +26,11 @@ export async function fetchSheetData(
 ): Promise<SheetRow[]> {
   const auth = getSheetsClient();
   const sheets = google.sheets({ version: "v4", auth });
+  
   const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-  if (!spreadsheetId) {
-    throw new Error("Missing GOOGLE_SHEET_ID env variable");
-  }
+  if (!spreadsheetId) throw new Error("Missing GOOGLE_SHEET_ID env variable");
+  
 
   const tabRange = `${tabName}!${range}`;
   const res = await sheets.spreadsheets.values.get({
