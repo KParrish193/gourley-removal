@@ -53,6 +53,7 @@ export default function Header() {
             alt={"gourley logo"}
             width={157}
             height={70}
+            priority
           />
         </Link>
 

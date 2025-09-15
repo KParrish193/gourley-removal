@@ -4,12 +4,22 @@ export type SheetRow = { [key: string]: string };
 
 export function getSheetsClient() {
   const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-  if (!clientEmail || !privateKey) {
-    throw new Error("Missing Google Sheets credentials");
-  }
+  // Validate all required env vars
+  if (!clientEmail) throw new Error("Missing GOOGLE_CLIENT_EMAIL env var");
+  if (!privateKey) throw new Error("Missing GOOGLE_PRIVATE_KEY env var");
+  if (!spreadsheetId) throw new Error("Missing GOOGLE_SHEET_ID env var");
 
+  // Sanitize private key: replace literal "\n" with real newlines and trim spaces
+  privateKey = privateKey.replace(/\\n/g, "\n").trim();
+
+  console.log("Client Email:", clientEmail);
+  console.log("Spreadsheet ID:", spreadsheetId);
+  console.log("Private Key starts with:", privateKey.slice(0, 40));
+  console.log("Private Key ends with:", privateKey.slice(-40));
+  
   const auth = new google.auth.JWT({
     email: clientEmail,
     key: privateKey,
@@ -24,26 +34,29 @@ export async function fetchSheetData(
   range: string
 ): Promise<SheetRow[]> {
   const sheets = getSheetsClient();  
-  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
 
-  if (!spreadsheetId) throw new Error("Missing GOOGLE_SHEET_ID env variable");
-
-  const res = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${tabName}!${range}`,
-  });
-
-  const rows = res.data.values ?? [];
-  if (rows.length === 0) return [];
-
-  const headers = rows[0];
-  const dataRows = rows.slice(1);
-
-  return dataRows.map((row) => {
-    const obj: SheetRow = {};
-    headers.forEach((header, i) => {
-      obj[header] = row[i] || "";
+  try {
+    const res = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${tabName}!${range}`,
     });
-    return obj;
-  });
+
+    const rows = res.data.values ?? [];
+    if (rows.length === 0) return [];
+
+    const headers = rows[0];
+    const dataRows = rows.slice(1);
+
+    return dataRows.map((row) => {
+      const obj: SheetRow = {};
+      headers.forEach((header, i) => {
+        obj[header] = row[i] || "";
+      });
+      return obj;
+    });
+  } catch (err: unknown) {
+    console.error("Error fetching Google Sheet data:", err);
+    throw err;
+  }
 }
