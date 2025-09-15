@@ -3,19 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-const heroContent = await fetchSheetData("Home", "A2:F10");
-const aboutContent = await fetchSheetData("Home", "K2:N10");
-
-// filter services data
-const servicesRows = await fetchSheetData("Home", "H1:H10");
-const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
-
-const locationDetails = await fetchSheetData("Home", "I1:I10");
-const location = locationDetails.map((row) => row["Service Location"]).filter(Boolean);
 
 export const revalidate = 0;
 
-export default function Home() {
+export default async function Home() {
+  const heroContent = await fetchSheetData("Home", "A2:F10");
+  const aboutContent = await fetchSheetData("Home", "K2:N10");
+
+  // filter services data
+  const servicesRows = await fetchSheetData("Home", "H1:H10");
+  const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
+
+  const locationDetails = await fetchSheetData("Home", "I1:I10");
+  const location = locationDetails
+    .map((row) => row["Service Location"])
+    .filter(Boolean);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
