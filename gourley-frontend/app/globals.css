@@ -3,6 +3,7 @@
   --dark-azure-60: rgb(20, 47, 66, 0.6);
   --dark-azure-40: rgb(20, 47, 66, 0.4);
   --burnt-orange: #DD5339;
+  --accent-orange: #DC3210;
   --vivid-lime: #B6F16A;
   --white: #FEFEFE;
   --background: var(--white);
@@ -77,7 +78,7 @@ a:hover {
   font-weight: 600;
   font-size: 1rem;
   max-width: fit-content;
-  border: solid 1.5px transparent;
+  border: solid 1.5px var(--accent-orange);
 }
 
 .button-primary:hover {
