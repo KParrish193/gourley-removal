@@ -25,6 +25,11 @@ interface FormErrors {
   description: string;
 }
 
+type ServiceRow = {
+  Services: string;
+  [key: string]: unknown; // optional extra fields
+};
+
 export default function Contact() {
   const [services, setServices] = useState<string[]>([]);
 
@@ -58,9 +63,9 @@ export default function Contact() {
   useEffect(() => {
     async function loadServices() {
       const res = await fetch("/api/services");
-      const data = await res.json();
+      const data: ServiceRow[] = await res.json();
       const filteredData = data
-        .map((row: { [x: string]: any }) => row["Services"])
+        .map((row) => row.Services)
         .filter(Boolean);
       setServices(filteredData);
     }
@@ -174,9 +179,7 @@ export default function Contact() {
 
       if (!res.ok) throw new Error("Failed to submit form");
 
-      setSuccess(
-        "Your message is on its way - we’ll get back to you shortly!"
-      );
+      setSuccess("Your message is on its way - we’ll get back to you shortly!");
       setFormData({
         timestamp: new Date().toISOString(),
         firstName: "",
@@ -194,8 +197,12 @@ export default function Contact() {
         jobType: "",
         description: "",
       });
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
       setSubmitting(false);
     }

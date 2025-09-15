@@ -1,67 +1,62 @@
 import { google } from "googleapis";
 
-export type SheetRow = {
-  [key: string]: string;
-};
+export type SheetRow = { [key: string]: string };
 
-const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
-const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+export function getSheetsClient() {
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-const auth = new google.auth.JWT({
-  email: clientEmail,
-  key: privateKey,
-  scopes: SCOPES,
-});
+  // Validate all required env vars
+  if (!clientEmail) throw new Error("Missing GOOGLE_CLIENT_EMAIL env var");
+  if (!privateKey) throw new Error("Missing GOOGLE_PRIVATE_KEY env var");
+  if (!spreadsheetId) throw new Error("Missing GOOGLE_SHEET_ID env var");
 
-const sheets = google.sheets({ version: "v4", auth });
+  // Sanitize private key: replace literal "\n" with real newlines and trim spaces
+  privateKey = privateKey.replace(/\\n/g, "\n").trim();
+
+  console.log("Client Email:", clientEmail);
+  console.log("Spreadsheet ID:", spreadsheetId);
+  console.log("Private Key starts with:", privateKey.slice(0, 40));
+  console.log("Private Key ends with:", privateKey.slice(-40));
+  
+  const auth = new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
+  });
+
+  return google.sheets({ version: "v4", auth });
+}
 
 export async function fetchSheetData(
   tabName: string,
   range: string
 ): Promise<SheetRow[]> {
-  if (!spreadsheetId) {
-    throw new Error("Missing GOOGLE_SHEET_ID env variable");
-  }
+  const sheets = getSheetsClient();  
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
 
-  const tabRange = `${tabName}!${range}`;
-  const res = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: tabRange,
-  });
-
-  const rows = res.data.values;
-  if (!rows || rows.length === 0) return [];
-
-  const headers = rows[0];
-  const dataRows = rows.slice(1);
-
-  return dataRows.map((row) => {
-    const obj: SheetRow = {};
-    headers.forEach((header, i) => {
-      obj[header] = row[i] || "";
+  try {
+    const res = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${tabName}!${range}`,
     });
-    return obj;
-  });
-}
 
-// helper function to post data to GoogleSheets Contact tab
-export async function appendToSheet(values: string[]) {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: clientEmail,
-      private_key: privateKey,
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
+    const rows = res.data.values ?? [];
+    if (rows.length === 0) return [];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: spreadsheetId,
-    range: "Contact!A:G", // Adjust range based on your sheet layout
-    valueInputOption: "RAW",
-    requestBody: {
-      values: [values],
-    },
-  });
+    const headers = rows[0];
+    const dataRows = rows.slice(1);
+
+    return dataRows.map((row) => {
+      const obj: SheetRow = {};
+      headers.forEach((header, i) => {
+        obj[header] = row[i] || "";
+      });
+      return obj;
+    });
+  } catch (err: unknown) {
+    console.error("Error fetching Google Sheet data:", err);
+    throw err;
+  }
 }

@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -44,9 +43,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${
-        visible ? styles.visible : styles.hidden
-      }`}
+      className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
     >
       <div className={styles.headerWrapper}>
         {/* logo */}
@@ -56,6 +53,7 @@ export default function Header() {
             alt={"gourley logo"}
             width={157}
             height={70}
+            priority
           />
         </Link>
 

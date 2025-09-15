@@ -1,21 +1,38 @@
-import { fetchSheetData } from "@/app/lib/gsheet";
+import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-const heroContent = await fetchSheetData("Home", "A2:F10");
-const aboutContent = await fetchSheetData("Home", "K2:N10");
-
-// filter services data
-const servicesRows = await fetchSheetData("Home", "H1:H10");
-const services = servicesRows.map((row) => row["Services"]).filter(Boolean);
-
-const locationDetails = await fetchSheetData("Home", "I1:I10");
-const location = locationDetails.map((row) => row["Service Location"]).filter(Boolean);
 
 export const revalidate = 0;
 
-export default function Home() {
+export default async function Home() {
+  let heroContent: SheetRow[] = [];
+  let aboutContent: SheetRow[] = [];
+  let services: string[] = [];
+  let location: string[] = [];
+
+  try {
+    const heroRows = await fetchSheetData("Home", "A2:F10");
+    heroContent = heroRows;
+
+    const aboutRows = await fetchSheetData("Home", "K2:N10");
+    aboutContent = aboutRows;
+
+    // filter services data
+    const servicesRows = await fetchSheetData("Home", "H1:H10");
+    services = servicesRows.map((row) => row["Services"]).filter((s): s is string => Boolean(s));
+
+    const locationRows = await fetchSheetData("Home", "I1:I10");
+    location = locationRows.map((row) => row["Service Location"]).filter((l): l is string => Boolean(l));
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Failed to fetch sheet data:", err.message);
+    } else {
+      console.error("Unknown error fetching sheet data", err);
+    }
+  }
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
