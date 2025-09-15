@@ -15,6 +15,11 @@ export function getSheetsClient() {
   // Sanitize private key: replace literal "\n" with real newlines and trim spaces
   privateKey = privateKey.replace(/\\n/g, "\n").trim();
 
+  console.log("Client Email:", clientEmail);
+  console.log("Spreadsheet ID:", spreadsheetId);
+  console.log("Private Key starts with:", privateKey.slice(0, 40));
+  console.log("Private Key ends with:", privateKey.slice(-40));
+  
   const auth = new google.auth.JWT({
     email: clientEmail,
     key: privateKey,
