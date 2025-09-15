@@ -44,7 +44,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [noHero]);
 
   return (
     <header

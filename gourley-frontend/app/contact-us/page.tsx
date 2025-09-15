@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Alert from '../components/alert/alert';
 import { useState, useEffect } from "react";
-
 import styles from "./contact.module.css";
 
 interface FormData {
@@ -53,18 +52,19 @@ export default function Contact() {
   const [success, setSuccess] = useState("");
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
 
-
   // set services dropdown dynamically
   useEffect(() => {
     async function loadServices() {
       const res = await fetch("/api/services");
-      const data = await res.json();
-      let filteredData: string[] = [];
-      filteredData = data
-        .map((row: { [x: string]: any }) => row["Services"])
-        .filter(Boolean);
+      const data: Record<string, string>[] = await res.json();
+
+      const filteredData = data
+        .map((row) => row["Services"])
+        .filter(Boolean) as string[]; // cast ensures TypeScript knows it’s string[]
+
       setServices(filteredData);
     }
+
     loadServices();
   }, []);
 
