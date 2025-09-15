@@ -209,7 +209,7 @@ export default function Contact() {
       <main className={styles.main}>
         <div className={styles.desktopImg}>
           <video autoPlay muted playsInline loop>
-            <source src="/videos/IMG_5346.mp4" type="video/mp4" />
+            <source src="/timelapse.mp4" type="video/mp4" />
             Your browser does not support video playback.
           </video>
         </div>
