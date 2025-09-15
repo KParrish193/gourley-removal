@@ -45,9 +45,14 @@ export async function POST(req: Request) {
 
     sheetStatus = `success`;
     console.log("Sheet append success");
-  } catch (err: any) {
-    sheetStatus = `error: ${err.message}`;
-    console.error("Sheet append error:", err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      sheetStatus = `error: ${err.message}`;
+      console.error("Google Sheets POST error:", err);
+    } else {
+      sheetStatus = "error: unknown error";
+      console.error("Google Sheets POST error:", err);
+    }
   }
 
   //Step 2: Send email with Resend
@@ -66,9 +71,14 @@ export async function POST(req: Request) {
     }
     emailStatus = "success";
     console.log("Email sent successfully");
-  } catch (err: any) {
-    emailStatus = `error: ${err.message}`;
-    console.error("Email send error:", err);
+  } catch (err: unknown) {
+      if (err instanceof Error) {
+        emailStatus = `error: ${err.message}`;
+        console.error("Email send error:", err);
+      } else {
+        emailStatus = "error: unknown error";
+        console.error("Email send error:", err);
+      }
   }
 
   return NextResponse.json({
