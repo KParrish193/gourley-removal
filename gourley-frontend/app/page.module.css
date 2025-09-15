@@ -257,6 +257,11 @@ section.hero {
     gap: 48px
   }
   
+  .heroVisual img,
+  .heroVisual video {
+      object-position: 65% 0%;
+  }
+
   .serviceInfo > .serviceArea {
     flex-direction: column;
     align-items: flex-start;

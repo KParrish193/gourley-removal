@@ -37,7 +37,7 @@
         object-fit: cover;
         height: 100%;
         width: 100%;
-        object-position: 100% 0;
+        object-position: 0% 0%;
     }
 }
 
@@ -90,7 +90,8 @@
 }
 
 .formRow > div > input,
-.formRow > div > select,
+.formRow select,
+/* .formRow > div > .selectWrapper, */
 .formRow > div > textarea {
     width: 100%;
     border-radius: 6px;
@@ -99,6 +100,37 @@
     font-family: var(--font-source-code-pro);
     padding: 0.5rem;
 }
+
+/* .formRow select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 100%;
+    border: none;
+    padding: 0.5rem;
+    color: var(--dark-azure);
+    font-family: var(--font-source-code-pro);
+} */
+
+.formRow > div > .selectWrapper {
+    position: relative;
+    padding: 0;
+}
+
+/* .formRow > div > .selectWrapper::after {
+    content: "";
+    display: block;
+    z-index: 100;
+    background-image: url("../../public/icons/carat.svg");
+    background-repeat: no-repeat;
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    right: 10px;
+} */
 
 .formRow > div > textarea {
     min-height: 350px;

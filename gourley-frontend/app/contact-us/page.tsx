@@ -308,26 +308,29 @@ export default function Contact() {
             <div className={`${styles.formRow} ${styles.fullWidth}`}>
               <div>
                 <label htmlFor="jobType">Service Type</label>
-                <select
-                  id="jobType"
-                  name="jobType"
-                  value={formData.jobType}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  required
-                >
-                  <option value="" disabled>
-                    Select One
-                  </option>
-                  {services.map((service, i: number) => {
-                    return (
-                      <option key={i} value={service}>
-                        {service}
-                      </option>
-                    );
-                  })}
-                  <option value="Other">Other</option>
-                </select>
+                {/* <div className={styles.selectWrapper}> */}
+                  <select
+                    id="jobType"
+                    name="jobType"
+                    value={formData.jobType}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.select}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select One
+                    </option>
+                    {services.map((service, i: number) => {
+                      return (
+                        <option key={i} value={service}>
+                          {service}
+                        </option>
+                      );
+                    })}
+                    <option value="Other">Other</option>
+                  </select>
+                {/* </div> */}
                 {formErrors.jobType && (
                   <span className={styles.error}>{formErrors.jobType}</span>
                 )}

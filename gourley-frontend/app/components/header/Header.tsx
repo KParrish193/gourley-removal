@@ -2,14 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import styles from "./header.module.css";
 import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
+  const pathname = usePathname();
+  const noHero = pathname === "/contact-us";
+
   const headerRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+
     let prevScrollPos = window.scrollY;
     const threshold = 5; // pixels you must scroll before toggling
     const hideAfter = 80; // how far down before hiding can happen
@@ -17,13 +22,14 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollPos = Math.max(window.scrollY, 0);
       // background color toggle
-      if (currentScrollPos > window.innerHeight - 80) {
+      if (currentScrollPos > window.innerHeight - 80 || noHero) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
 
-      if (!headerRef.current) return; 
+      if (!headerRef.current) return;
+
       // Only hide if we've scrolled past the initial visible area 
       if (currentScrollPos > hideAfter) { if (currentScrollPos - prevScrollPos > threshold) { 
         // scrolling down past threshold 
