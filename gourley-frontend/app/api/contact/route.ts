@@ -4,20 +4,25 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    type: process.env.GOOGLE_TYPE,
-    project_id: process.env.GOOGLE_PROJECT_ID,
-    private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    client_id: process.env.GOOGLE_CLIENT_ID,
-    universe_domain: process.env.GOOGLE_UNIVERSE_DOMAIN,
-  },
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+function getSheetsClient() {
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+
+  return new google.auth.GoogleAuth({
+    credentials: {
+      type: process.env.GOOGLE_TYPE,
+      project_id: process.env.GOOGLE_PROJECT_ID,
+      private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+      private_key: privateKey,
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      universe_domain: process.env.GOOGLE_UNIVERSE_DOMAIN,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+}
 
 export async function POST(req: Request) {
+  const auth = getSheetsClient();
     
   const body = await req.json();
   let sheetStatus = `pending`;

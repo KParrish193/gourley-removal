@@ -4,23 +4,30 @@ export type SheetRow = {
   [key: string]: string;
 };
 
-const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
-const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+export function getSheetsClient() {
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 
-const auth = new google.auth.JWT({
-  email: clientEmail,
-  key: privateKey,
-  scopes: SCOPES,
-});
+  if (!clientEmail || !privateKey) {
+    throw new Error("Missing Google Sheets credentials");
+  }
 
-const sheets = google.sheets({ version: "v4", auth });
+  return new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: SCOPES,
+  });
+}
 
 export async function fetchSheetData(
   tabName: string,
   range: string
 ): Promise<SheetRow[]> {
+  const auth = getSheetsClient();
+  const sheets = google.sheets({ version: "v4", auth });
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+
   if (!spreadsheetId) {
     throw new Error("Missing GOOGLE_SHEET_ID env variable");
   }
