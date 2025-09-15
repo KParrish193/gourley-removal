@@ -45,23 +45,3 @@ export async function fetchSheetData(
     return obj;
   });
 }
-
-// helper function to post data to GoogleSheets Contact tab
-export async function appendToSheet(values: string[]) {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: clientEmail,
-      private_key: privateKey,
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: spreadsheetId,
-    range: "Contact!A:G", // Adjust range based on your sheet layout
-    valueInputOption: "RAW",
-    requestBody: {
-      values: [values],
-    },
-  });
-}
