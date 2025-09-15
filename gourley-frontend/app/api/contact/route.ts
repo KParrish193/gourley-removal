@@ -57,6 +57,7 @@ export async function POST(req: Request) {
 
   //Step 2: Send email with Resend
   try {
+    console.log(process.env.EMAIL_TO)
     const { error } = await resend.emails.send({
       from: `Gourley Tree Removal Site <${process.env.EMAIL_FRO}>`,
       to: `${process.env.EMAIL_TO}`,

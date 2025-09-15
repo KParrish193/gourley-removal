@@ -7,8 +7,6 @@ export default function InstagramFeed() {
         src="https://snapwidget.com/embed/123456" // replace with your link
         className="snapwidget-widget"
         allowTransparency={true}
-        frameBorder="0"
-        scrolling="no"
         style={{
           border: "none",
           overflow: "hidden",
