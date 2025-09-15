@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Alert from '../components/alert/alert';
 import { useState, useEffect } from "react";
+import { SheetRow } from "@/app/lib/gsheet";
 
 import styles from "./contact.module.css";
 
@@ -59,7 +60,8 @@ export default function Contact() {
     async function loadServices() {
       const res = await fetch("/api/services");
       const data = await res.json();
-      const filteredData = data
+      let filteredData: string[] = [];
+      filteredData = data
         .map((row: { [x: string]: any }) => row["Services"])
         .filter(Boolean);
       setServices(filteredData);
@@ -195,7 +197,7 @@ export default function Contact() {
         description: "",
       });
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError(`Something went wrong. ${err}. Please try again.`);
     } finally {
       setSubmitting(false);
     }
