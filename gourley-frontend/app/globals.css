@@ -169,3 +169,47 @@ a:hover {
     right: 16px;
   }
 }
+
+
+/* customize instagram widget */
+
+.eui-widget-title,
+.eapps-instagram-feed {
+    font-family: var(--font-heading) !important;
+    letter-spacing: -1.2px !important;
+    font-size: 1.1em !important;
+    padding: 0 !important;
+    text-transform: capitalize;
+}
+
+button.eapps-instagram-feed-posts-grid-load-more {
+  display: block;
+  border-radius: 1.25rem;
+  background-color: var(--burnt-orange);
+  width: calc(80px + 5rem) !important;
+  border: solid 1.5px var(--accent-orange);
+  position: relative;
+  padding: 0.5rem 2.5rem;
+}
+
+button.eapps-instagram-feed-posts-grid-load-more:hover {
+  background-color: var(--dark-azure) !important;
+  transition: all 0.2 ease;
+  cursor: pointer;
+  border: solid 1.5px var(--vivid-lime);
+}
+
+button.eapps-instagram-feed-posts-grid-load-more > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px !important;
+  display: block;
+  color: var(--white) !important;
+  font-family: var(--font-inter) !important;
+  letter-spacing: -1.3px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  text-transform: capitalize;
+}

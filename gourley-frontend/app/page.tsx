@@ -1,4 +1,5 @@
 import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
+import InstagramFeed from "./components/instagram/instagramFeed";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -148,6 +149,11 @@ export default async function Home() {
             );
           })}
         </section>
+
+        <section>
+          <InstagramFeed />
+        </section>
+        
       </main>
     </div>
   );
