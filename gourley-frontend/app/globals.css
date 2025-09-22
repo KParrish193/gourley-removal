@@ -180,6 +180,7 @@ a:hover {
     font-size: 1.1em !important;
     padding: 0 !important;
     text-transform: capitalize;
+    margin-bottom: 2rem;
 }
 
 button.eapps-instagram-feed-posts-grid-load-more {
