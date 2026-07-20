@@ -58,7 +58,7 @@ a {
 }
 
 a:hover {
-  cursor: pointer important!;
+  cursor: pointer !important;
 }
 
 /* @media (prefers-color-scheme: dark) {
