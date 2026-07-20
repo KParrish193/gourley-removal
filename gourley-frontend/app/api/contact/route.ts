@@ -33,10 +33,11 @@ export async function POST(req: Request) {
   try { 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: "Contact!A:G",
+      range: "Contact!A:H",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [[
+            // add unique submissionID
             new Date().toLocaleString(),
             body.firstName,
             body.lastName,
@@ -61,7 +62,9 @@ export async function POST(req: Request) {
       from: `Gourley Tree Removal Site <${process.env.EMAIL_FROM}>`,
       to: `${process.env.EMAIL_TO}`,
       subject: "New Contact Form Submission",
-      text: `New submission:\n\n${JSON.stringify(body, null, 2)}`,
+      replyTo: body.email,
+      // TODO: format email template
+      text: `New contact form submission:\n\n${JSON.stringify(body, null, 2)}`,
     });
 
     if (error) throw new Error(error.message);
