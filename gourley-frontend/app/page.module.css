@@ -160,7 +160,7 @@ section.hero {
 
 /* About Section */
 /* fifty fifty blocks */
-.fiftyFifty {
+.fiftyFifty > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -169,10 +169,6 @@ section.hero {
   width: 100%;
   max-width: var(--fullhd);
   margin: 0 auto 24px;
-}
-
-.fiftyFifty > div {
-  width: 100%;
 }
 
 .fiftyFifty > div > div {
@@ -247,13 +243,13 @@ section.hero {
     max-width: 85%;
   }
 
-  .about .fiftyFifty:first-of-type {
+  .aboutHeader {
     margin: 0 0 -16px;
   }
 
   .serviceInfo > .serviceArea,
-  .fiftyFifty,
-  .fiftyFifty:nth-of-type(2n) {
+  .fiftyFifty >div,
+  .fiftyFifty:nth-of-type(2n) > div {
     gap: 32px;
   }
 
@@ -297,7 +293,7 @@ section.hero {
     height: auto;
   }
 
-  .about .fiftyFifty:first-of-type {
+  .aboutHeader {
     margin: 0 0 -28px;
   }
 
@@ -305,21 +301,21 @@ section.hero {
     margin: 0;
   }
 
-  .fiftyFifty,
-  .fiftyFifty:nth-of-type(2n) {
+  .fiftyFifty > div,
+  .fiftyFifty:nth-of-type(2n) > div {
     flex-direction: column;
     gap: 48px;
     margin-top: 48px;
 
   }
 
-  .fiftyFifty > div {
+  .fiftyFifty > div > div {
     width: 100%;
     max-width: 500px;
   }
   
-  .fiftyFifty div:nth-of-type(2),
-  .fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
+  .fiftyFifty > div > div:nth-of-type(2),
+  .fiftyFifty:nth-of-type(2n + 1) > div > div:nth-of-type(2) {
     justify-content: center;
   }
 }
