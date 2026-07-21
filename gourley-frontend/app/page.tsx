@@ -138,37 +138,37 @@ export default async function Home() {
 
             {aboutContent.map((about, i: number) => {
               return (
-                <AnimatedScroll key={i}>
-                  <div className={styles.fiftyFifty}>
-                    <div>
-                      {about.subheading ? <h3>{about.subheading}</h3> : null}
-                      {about.text ? <div>{about.text}</div>: null}
-                    </div>
-                    <div>
-                      {about.visual_path.includes("/videos") ? (
-                        <div className={styles.visualWrapper}>
-                          <video autoPlay muted playsInline loop>
-                            <source src={`${about.visual_path}`} type="video/mp4" />
-                            Your browser does not support video playback.
-                          </video>
-                        </div>
-                      ) : (
-                        <div className={styles.visualWrapper}>
-                          <Image
-                            src={`${about.visual_path}`}
-                            alt={`${about.visual_alt}`}
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                      )}
-                    </div>
+                  <div key={i} className={styles.fiftyFifty}>
+                    <AnimatedScroll>
+                      <div>
+                        {about.subheading ? <h3>{about.subheading}</h3> : null}
+                        {about.text ? <div>{about.text}</div>: null}
+                      </div>
+                      <div>
+                        {about.visual_path.includes("/videos") ? (
+                          <div className={styles.visualWrapper}>
+                            <video autoPlay muted playsInline loop>
+                              <source src={`${about.visual_path}`} type="video/mp4" />
+                              Your browser does not support video playback.
+                            </video>
+                          </div>
+                        ) : (
+                          <div className={styles.visualWrapper}>
+                            <Image
+                              src={`${about.visual_path}`}
+                              alt={`${about.visual_alt}`}
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </AnimatedScroll>
                   </div>
-                </AnimatedScroll>
               );
             })}
           </section>
-
+          
         <AnimatedScroll>
           <section>
             <InstagramFeed />

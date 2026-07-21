@@ -172,18 +172,20 @@ section.hero {
 }
 
 .fiftyFifty > div {
+  width: 100%;
+}
+
+.fiftyFifty > div > div {
   width: 50%;
   display: flex;
 }
 
-div.fiftyFifty:nth-of-type(2n) {
+.fiftyFifty:nth-of-type(2n) {
   flex-direction: row-reverse;
   border: solid 2px lime;
 }
 
-
-
-div.fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
+.fiftyFifty:nth-of-type(2n + 1) > div > div:nth-of-type(2) {
   justify-content: flex-end;
 }
 
