@@ -4,7 +4,7 @@
     background: var(--burnt-orange);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 700ms ease-out;
+    transition: transform 750ms cubic-bezier(.22, 1.2, .36, 1);
 }
 
 .visible {

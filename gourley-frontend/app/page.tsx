@@ -135,6 +135,7 @@ export default async function Home() {
                 <h4>Meet Steve Gourley</h4>
               </div>
             </AnimatedScroll>
+            
             {aboutContent.map((about, i: number) => {
               return (
                 <AnimatedScroll>
