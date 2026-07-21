@@ -40,7 +40,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`${className} reveal ${visible ? styles.visible : ""}`}
+      className={`${className} ${styles.reveal} ${visible ? styles.visible : ""}`}
     >
       {children}
     </div>
