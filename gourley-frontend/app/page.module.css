@@ -84,8 +84,8 @@ section.hero {
 }
 
 
-/*? services ?*/
-.serviceInfo > div {
+/* Services Section */
+.serviceInfo > div > div {
   display: flex;
 }
 
@@ -94,7 +94,7 @@ section.hero {
 }
 
 /* map block */
-.serviceInfo > .serviceArea {
+.serviceInfo .serviceArea {
   align-items: center;
   gap: 64px;
   justify-content: space-between;
@@ -102,17 +102,17 @@ section.hero {
   max-width: var(--fullhd);
 }
 
-.serviceInfo > .serviceArea p {
+.serviceInfo .serviceArea p {
   margin-bottom: 24px;
   max-width: 400px;
 }
 
-.serviceInfo > .serviceArea img {
+.serviceInfo .serviceArea img {
   display: block;
 }
 
 /* Services List */
-.serviceInfo > .servicesList {
+.serviceInfo .servicesList {
 
   padding: 64px 0;
   /* border-top: solid 1px var(--dark-azure-40);
@@ -122,24 +122,24 @@ section.hero {
   max-width: var(--desktop);
 }
 
-.serviceInfo > .servicesList li {
+.serviceInfo .servicesList li {
   list-style: none;
   position: relative;
   padding-left: 36px;
 }
 
-.serviceInfo > .servicesList li img {
+.serviceInfo .servicesList li img {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
 }
 
-.serviceInfo > .servicesList a {
+.serviceInfo .servicesList a {
   margin-top: 2.4rem;
 }
 
-.serviceInfo > .servicesList > div:first-of-type {
+.serviceInfo .servicesList > div:first-of-type {
   justify-content: flex-start;
 }
 
