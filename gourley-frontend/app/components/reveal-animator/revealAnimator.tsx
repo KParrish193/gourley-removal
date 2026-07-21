@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import styles from "./animator.module.css";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -39,7 +40,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`${className} reveal ${visible ? "visible" : ""}`}
+      className={`${className} reveal ${visible ? styles.visible : ""}`}
     >
       {children}
     </div>

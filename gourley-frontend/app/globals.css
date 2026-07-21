@@ -170,9 +170,17 @@ a:hover {
   }
 }
 
+/* accessibility motion reduction */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal * {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
 
 /* customize instagram widget */
-
 .eui-widget-title,
 .eapps-instagram-feed {
     font-family: var(--font-heading) !important;
