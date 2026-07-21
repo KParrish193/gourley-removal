@@ -1,5 +1,6 @@
 import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import InstagramFeed from "./components/instagram/instagramFeed";
+import RevealAnimator from './components/reveal-animator/revealAnimator';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -75,80 +76,84 @@ export default async function Home() {
           })}
         </section>
 
-        <section className={styles.serviceInfo}>
-          <div className={styles.serviceArea}>
-            <div>
-              <h3>Where We Work</h3>
-              {location.map((loc, i: number) => {
-                return <p key={i}>{loc}</p>;
-              })}
-            </div>
-            <Image
-              src={"/map/servicemap.png"}
-              alt={"map of hawaii"}
-              width={500}
-              height={500}
-              priority
-            />
-          </div>
-          <div className={styles.servicesList}>
-            <h3>What We Offer</h3>
-            <ul>
-              {services.map((service, i: number) => {
-                return (
-                  <li key={i}>
-                    <Image
-                      src={"/icons/filledlog.png"}
-                      alt={"log icon"}
-                      width={25}
-                      height={25}
-                    />
-                    {service}
-                  </li>
-                );
-              })}
-            </ul>
-            <Link className="button-primary" href={"/contact-us"}>
-              Get an Estimate
-            </Link>
-          </div>
-        </section>
-
-        <section className={styles.about}>
-          <div className={styles.fiftyFifty}>
-            <h3>About Us</h3>
-            <h4>Meet Steve Gourley</h4>
-          </div>
-          {aboutContent.map((about, i: number) => {
-            return (
-              <div key={i} className={styles.fiftyFifty}>
-                <div>
-                  {about.subheading ? <h3>{about.subheading}</h3> : null}
-                  <div>{about.text}</div>
-                </div>
-                <div>
-                  {about.visual_path.includes("/videos") ? (
-                    <div className={styles.visualWrapper}>
-                      <video autoPlay muted playsInline loop>
-                        <source src={`${about.visual_path}`} type="video/mp4" />
-                        Your browser does not support video playback.
-                      </video>
-                    </div>
-                  ) : (
-                    <div className={styles.visualWrapper}>
-                      <Image
-                        src={`${about.visual_path}`}
-                        alt={`${about.visual_alt}`}
-                        width={500}
-                        height={500}
-                      />
-                    </div>
-                  )}
-                </div>
+        <RevealAnimator>
+          <section className={styles.serviceInfo}>
+            <div className={styles.serviceArea}>
+              <div>
+                <h3>Where We Work</h3>
+                {location.map((loc, i: number) => {
+                  return <p key={i}>{loc}</p>;
+                })}
               </div>
-            );
-          })}
-        </section>
+              <Image
+                src={"/map/servicemap.png"}
+                alt={"map of hawaii"}
+                width={500}
+                height={500}
+                priority
+              />
+            </div>
+            <div className={styles.servicesList}>
+              <h3>What We Offer</h3>
+              <ul>
+                {services.map((service, i: number) => {
+                  return (
+                    <li key={i}>
+                      <Image
+                        src={"/icons/filledlog.png"}
+                        alt={"log icon"}
+                        width={25}
+                        height={25}
+                      />
+                      {service}
+                    </li>
+                  );
+                })}
+              </ul>
+              <Link className="button-primary" href={"/contact-us"}>
+                Get an Estimate
+              </Link>
+            </div>
+          </section>
+        </RevealAnimator>
+
+        <RevealAnimator>
+          <section className={styles.about}>
+            <div className={styles.fiftyFifty}>
+              <h3>About Us</h3>
+              <h4>Meet Steve Gourley</h4>
+            </div>
+            {aboutContent.map((about, i: number) => {
+              return (
+                <div key={i} className={styles.fiftyFifty}>
+                  <div>
+                    {about.subheading ? <h3>{about.subheading}</h3> : null}
+                    <div>{about.text}</div>
+                  </div>
+                  <div>
+                    {about.visual_path.includes("/videos") ? (
+                      <div className={styles.visualWrapper}>
+                        <video autoPlay muted playsInline loop>
+                          <source src={`${about.visual_path}`} type="video/mp4" />
+                          Your browser does not support video playback.
+                        </video>
+                      </div>
+                    ) : (
+                      <div className={styles.visualWrapper}>
+                        <Image
+                          src={`${about.visual_path}`}
+                          alt={`${about.visual_alt}`}
+                          width={500}
+                          height={500}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        </RevealAnimator>
 
         <section>
           <InstagramFeed />

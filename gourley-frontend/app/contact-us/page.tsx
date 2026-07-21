@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Alert from '../components/alert/alert';
+import RevealAnimator from '../components/reveal-animator/revealAnimator';
 import { useState, useEffect } from "react";
 import styles from "./contact.module.css";
 
