@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "./animator.module.css";
+import styles from "./scroll.module.css";
 
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export default function Reveal({
+export default function Scroll({
   children,
   className = "",
 }: RevealProps) {

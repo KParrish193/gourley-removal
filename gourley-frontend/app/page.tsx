@@ -1,6 +1,7 @@
 import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import InstagramFeed from "./components/instagram/instagramFeed";
-import RevealAnimator from './components/reveal-animator/revealAnimator';
+import ParallaxWrapper from "./components/animations/parallax/Parallax";
+import Scroll from './components/animations/reveal/Scroll';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -35,26 +36,32 @@ export default async function Home() {
     }
   }
 
+
+
+  
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <section className={styles.hero}>
           {heroContent.map((hero, i: number) => {
             return (
+
               <div key={i} className={styles.heroPanel}>
-                <div className={styles.heroVisual}>
-                  {hero.visual_path.includes("/videos") ? (
-                    <video src={`${hero.visual_path}`}></video>
-                  ) : (
-                    <Image
-                      src={`${hero.visual_path}`}
-                      alt={`${hero.visual_alt}`}
-                      width={1024}
-                      height={2032}
-                      priority
-                    />
-                  )}
-                </div>
+                <ParallaxWrapper>
+                  <div className={styles.heroVisual}>
+                    {hero.visual_path.includes("/videos") ? (
+                      <video src={`${hero.visual_path}`}></video>
+                    ) : (
+                      <Image
+                        src={`${hero.visual_path}`}
+                        alt={`${hero.visual_alt}`}
+                        width={1024}
+                        height={2032}
+                        priority
+                      />
+                    )}
+                  </div>
+                </ParallaxWrapper>
                 <div className={styles.heroContentWrapper}>
                   <div className={styles.heroContent}>
                     {hero.heading ? <h1>{hero.heading}</h1> : null}
@@ -76,7 +83,7 @@ export default async function Home() {
           })}
         </section>
 
-        <RevealAnimator>
+        <Scroll>
           <section className={styles.serviceInfo}>
             <div className={styles.serviceArea}>
               <div>
@@ -115,9 +122,9 @@ export default async function Home() {
               </Link>
             </div>
           </section>
-        </RevealAnimator>
+        </Scroll>
 
-        <RevealAnimator>
+        <Scroll>
           <section className={styles.about}>
             <div className={styles.fiftyFifty}>
               <h3>About Us</h3>
@@ -153,7 +160,7 @@ export default async function Home() {
               );
             })}
           </section>
-        </RevealAnimator>
+        </Scroll>
 
         <section>
           <InstagramFeed />

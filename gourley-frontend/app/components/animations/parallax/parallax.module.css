@@ -1,0 +1,5 @@
+.parallax {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    transition: transform 750ms cubic-bezier(.22, 1.2, .36, 1);
+}
