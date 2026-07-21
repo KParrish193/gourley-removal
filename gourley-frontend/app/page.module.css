@@ -161,6 +161,7 @@ section.hero {
 /* About Section */
 /* fifty fifty blocks */
 .fiftyFifty {
+  border: solid 2px orange;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -174,10 +175,12 @@ section.hero {
 .fiftyFifty > div {
   width: 50%;
   display: flex;
+  border: solid 1px purple;
 }
 
 .fiftyFifty:nth-of-type(2n) {
   flex-direction: row-reverse;
+  border: solid 2px lime;
 }
 
 .fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
@@ -211,7 +214,7 @@ section.hero {
   margin-bottom: 0;
 }
 
-.about .fiftyFifty:first-of-type > h3 {
+.about > div > .fiftyFifty:first-of-type > h3 {
   margin-bottom: 0;
 }
 
