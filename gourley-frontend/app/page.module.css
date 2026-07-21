@@ -166,6 +166,7 @@ section.hero {
   justify-content: space-between;
   align-items: center;
   gap: 64px;
+  width: 100%;
   max-width: var(--fullhd);
   margin: 0 auto 24px;
 }
@@ -224,6 +225,7 @@ section.hero {
   .main {
     align-items: center;
   }
+
   .heroPanel,
   .heroVisual,
   .heroVisual img,

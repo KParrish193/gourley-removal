@@ -128,7 +128,6 @@ export default async function Home() {
             </div>
           </section>
 
-
           <section className={styles.about}>
             <AnimatedScroll>
               <div className={styles.fiftyFifty}>
@@ -142,7 +141,7 @@ export default async function Home() {
                   <div key={i} className={styles.fiftyFifty}>
                     <div>
                       {about.subheading ? <h3>{about.subheading}</h3> : null}
-                      <div>{about.text}</div>
+                      {about.text ? <div>{about.text}</div>: null}
                     </div>
                     <div>
                       {about.visual_path.includes("/videos") ? (
