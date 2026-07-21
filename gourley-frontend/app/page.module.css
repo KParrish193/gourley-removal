@@ -206,7 +206,7 @@ section.hero {
 }
 
 /* about section heading */
-.about > div > .fiftyFifty:first-of-type {
+.aboutHeader {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -214,7 +214,7 @@ section.hero {
   margin-bottom: 0;
 }
 
-.about > div > .fiftyFifty:first-of-type > h3 {
+.aboutHeader > h3 {
   margin-bottom: 0;
 }
 
