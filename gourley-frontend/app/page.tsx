@@ -128,7 +128,7 @@ export default async function Home() {
 
 
           <section className={styles.about}>
-          <AnimatedScroll>
+            <AnimatedScroll>
               <div className={styles.fiftyFifty}>
                 <h3>About Us</h3>
                 <h4>Meet Steve Gourley</h4>

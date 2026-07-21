@@ -205,8 +205,6 @@ section.hero {
   margin-bottom: 2rem;
 }
 
-
-
 /* small desktop/most mobile */
 @media (max-width: 1052px) {
   .main {

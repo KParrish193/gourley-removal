@@ -40,7 +40,7 @@ export default function AnimatedScroll({
   return (
     <div
       ref={ref}
-      className={`${className} ${styles.reveal} ${visible ? styles.visible : ""}`}
+      className={`${className} ${styles.scrollReveal} ${visible ? styles.visible : ""}`}
     >
       {children}
     </div>
