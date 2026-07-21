@@ -24,10 +24,11 @@
   padding: 0 1.5rem;
 }
 
-/*? hero ?*/
+/* hero styles*/
 section.hero {
   padding: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .heroPanel {
@@ -110,12 +111,12 @@ section.hero {
   display: block;
 }
 
-/* services list */
+/* Services List */
 .serviceInfo > .servicesList {
-  margin: 64px auto 48px;
+
   padding: 64px 0;
-  border-top: solid 1px var(--dark-azure-40);
-  border-bottom: solid 1px var(--dark-azure-40);
+  /* border-top: solid 1px var(--dark-azure-40);
+  border-bottom: solid 1px var(--dark-azure-40); */
   align-items: center;
   flex-direction: column;
   max-width: var(--desktop);
@@ -143,7 +144,7 @@ section.hero {
 }
 
 
-/*? about ?*/
+/* About Section */
 /* fifty fifty blocks */
 .fiftyFifty {
   display: flex;
@@ -211,7 +212,6 @@ section.hero {
   .main {
     align-items: center;
   }
-
   .heroPanel,
   .heroVisual,
   .heroVisual img,

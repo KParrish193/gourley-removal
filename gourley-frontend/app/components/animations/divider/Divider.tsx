@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "./scroll.module.css";
+import styles from "./divider.module.css";
 
-type RevealProps = {
+type AnimatedDividerProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export default function AnimatedScroll({
+export default function AnimatedDivider({
   children,
   className = "",
-}: RevealProps) {
+}: AnimatedDividerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -28,7 +28,7 @@ export default function AnimatedScroll({
         }
       },
       {
-        threshold: 0.15,
+        threshold: 0.2,
       }
     );
 
@@ -40,7 +40,9 @@ export default function AnimatedScroll({
   return (
     <div
       ref={ref}
-      className={`${className} ${styles.reveal} ${visible ? styles.visible : ""}`}
+      className={`${styles.dividerWrapper} ${
+        visible ? styles.visible : ""
+      } ${className}`}
     >
       {children}
     </div>

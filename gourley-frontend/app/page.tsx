@@ -1,7 +1,8 @@
 import { fetchSheetData, SheetRow } from "@/app/lib/gsheet";
 import InstagramFeed from "./components/instagram/instagramFeed";
 import ParallaxWrapper from "./components/animations/parallax/Parallax";
-import Scroll from './components/animations/reveal/Scroll';
+import AnimatedDivider from "./components/animations/divider/Divider";
+import AnimatedScroll from './components/animations/reveal/Scroll';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -36,8 +37,6 @@ export default async function Home() {
     }
   }
 
-
-
   
   return (
     <div className={styles.page}>
@@ -45,7 +44,6 @@ export default async function Home() {
         <section className={styles.hero}>
           {heroContent.map((hero, i: number) => {
             return (
-
               <div key={i} className={styles.heroPanel}>
                 <ParallaxWrapper>
                   <div className={styles.heroVisual}>
@@ -83,23 +81,27 @@ export default async function Home() {
           })}
         </section>
 
-        <Scroll>
+
           <section className={styles.serviceInfo}>
-            <div className={styles.serviceArea}>
-              <div>
-                <h3>Where We Work</h3>
-                {location.map((loc, i: number) => {
-                  return <p key={i}>{loc}</p>;
-                })}
+            <AnimatedScroll>
+              <div className={styles.serviceArea}>
+                <div>
+                  <h3>Where We Work</h3>
+                  {location.map((loc, i: number) => {
+                    return <p key={i}>{loc}</p>;
+                  })}
+                </div>
+                <Image
+                  src={"/map/servicemap.png"}
+                  alt={"map of hawaii"}
+                  width={500}
+                  height={500}
+                  priority
+                />
               </div>
-              <Image
-                src={"/map/servicemap.png"}
-                alt={"map of hawaii"}
-                width={500}
-                height={500}
-                priority
-              />
-            </div>
+            </AnimatedScroll>
+
+            <AnimatedDivider>
             <div className={styles.servicesList}>
               <h3>What We Offer</h3>
               <ul>
@@ -121,51 +123,55 @@ export default async function Home() {
                 Get an Estimate
               </Link>
             </div>
+            </AnimatedDivider >
           </section>
-        </Scroll>
 
-        <Scroll>
+
           <section className={styles.about}>
-            <div className={styles.fiftyFifty}>
-              <h3>About Us</h3>
-              <h4>Meet Steve Gourley</h4>
-            </div>
+          <AnimatedScroll>
+              <div className={styles.fiftyFifty}>
+                <h3>About Us</h3>
+                <h4>Meet Steve Gourley</h4>
+              </div>
+            </AnimatedScroll>
             {aboutContent.map((about, i: number) => {
               return (
-                <div key={i} className={styles.fiftyFifty}>
-                  <div>
-                    {about.subheading ? <h3>{about.subheading}</h3> : null}
-                    <div>{about.text}</div>
+                <AnimatedScroll>
+                  <div key={i} className={styles.fiftyFifty}>
+                    <div>
+                      {about.subheading ? <h3>{about.subheading}</h3> : null}
+                      <div>{about.text}</div>
+                    </div>
+                    <div>
+                      {about.visual_path.includes("/videos") ? (
+                        <div className={styles.visualWrapper}>
+                          <video autoPlay muted playsInline loop>
+                            <source src={`${about.visual_path}`} type="video/mp4" />
+                            Your browser does not support video playback.
+                          </video>
+                        </div>
+                      ) : (
+                        <div className={styles.visualWrapper}>
+                          <Image
+                            src={`${about.visual_path}`}
+                            alt={`${about.visual_alt}`}
+                            width={500}
+                            height={500}
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    {about.visual_path.includes("/videos") ? (
-                      <div className={styles.visualWrapper}>
-                        <video autoPlay muted playsInline loop>
-                          <source src={`${about.visual_path}`} type="video/mp4" />
-                          Your browser does not support video playback.
-                        </video>
-                      </div>
-                    ) : (
-                      <div className={styles.visualWrapper}>
-                        <Image
-                          src={`${about.visual_path}`}
-                          alt={`${about.visual_alt}`}
-                          width={500}
-                          height={500}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
+                </AnimatedScroll>
               );
             })}
           </section>
-        </Scroll>
 
-        <section>
-          <InstagramFeed />
-        </section>
-        
+        <AnimatedScroll>
+          <section>
+            <InstagramFeed />
+          </section>
+        </AnimatedScroll>
       </main>
     </div>
   );
