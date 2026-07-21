@@ -180,7 +180,7 @@ section.hero {
   display: flex;
 }
 
-.fiftyFifty:nth-of-type(2n) {
+.fiftyFifty:nth-of-type(2n) > div {
   flex-direction: row-reverse;
   border: solid 2px lime;
 }
