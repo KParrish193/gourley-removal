@@ -175,12 +175,15 @@ section.hero {
 .fiftyFifty > div {
   width: 50%;
   display: flex;
-  border: solid 1px purple;
 }
 
 .fiftyFifty:nth-of-type(2n) {
   flex-direction: row-reverse;
   border: solid 2px lime;
+}
+
+.fiftyFifty:nth-of-type(2n + 1) {
+  border: solid 2px purple;
 }
 
 .fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
@@ -218,7 +221,7 @@ section.hero {
   margin-bottom: 0;
 }
 
-.fiftyFifty > h4 {
+.aboutHeader > h4 {
   color: var(--burnt-orange);
   margin-bottom: 2rem;
 }

@@ -138,8 +138,8 @@ export default async function Home() {
 
             {aboutContent.map((about, i: number) => {
               return (
-                <AnimatedScroll>
-                  <div key={i} className={styles.fiftyFifty}>
+                <AnimatedScroll key={i}>
+                  <div className={styles.fiftyFifty}>
                     <div>
                       {about.subheading ? <h3>{about.subheading}</h3> : null}
                       {about.text ? <div>{about.text}</div>: null}
