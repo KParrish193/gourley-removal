@@ -101,29 +101,31 @@ export default async function Home() {
               </div>
             </AnimatedScroll>
 
-            <AnimatedDivider>
-            <div className={styles.servicesList}>
-              <h3>What We Offer</h3>
-              <ul>
-                {services.map((service, i: number) => {
-                  return (
-                    <li key={i}>
-                      <Image
-                        src={"/icons/filledlog.png"}
-                        alt={"log icon"}
-                        width={25}
-                        height={25}
-                      />
-                      {service}
-                    </li>
-                  );
-                })}
-              </ul>
-              <Link className="button-primary" href={"/contact-us"}>
-                Get an Estimate
-              </Link>
+            <div className={styles.dividerWrapper}>
+              <AnimatedDivider />
+                <div className={styles.servicesList}>
+                  <h3>What We Offer</h3>
+                  <ul>
+                    {services.map((service, i: number) => {
+                      return (
+                        <li key={i}>
+                          <Image
+                            src={"/icons/filledlog.png"}
+                            alt={"log icon"}
+                            width={25}
+                            height={25}
+                          />
+                          {service}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <Link className="button-primary" href={"/contact-us"}>
+                    Get an Estimate
+                  </Link>
+                </div>
+              <AnimatedDivider />
             </div>
-            </AnimatedDivider >
           </section>
 
 

@@ -3,15 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./divider.module.css";
 
-type AnimatedDividerProps = {
-  children: React.ReactNode;
-  className?: string;
-};
-
-export default function AnimatedDivider({
-  children,
-  className = "",
-}: AnimatedDividerProps) {
+export default function AnimatedDivider() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -28,7 +20,7 @@ export default function AnimatedDivider({
         }
       },
       {
-        threshold: 0.2,
+        threshold: 0.5,
       }
     );
 
@@ -40,11 +32,9 @@ export default function AnimatedDivider({
   return (
     <div
       ref={ref}
-      className={`${styles.dividerWrapper} ${
+      className={`${styles.divider} ${
         visible ? styles.visible : ""
-      } ${className}`}
-    >
-      {children}
-    </div>
+      }`}
+    />
   );
 }

@@ -24,6 +24,23 @@
   padding: 0 1.5rem;
 }
 
+/* animated divider wrapper */
+.dividerWrapper {
+  margin: 64px auto 48px;
+}
+
+@media (max-width: 1052px) {
+  .dividerWrapper {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 769px) {
+  .dividerWrapper {
+    margin: 48px auto 0;
+  }
+}
+
 /* hero styles*/
 section.hero {
   padding: 0;
@@ -113,10 +130,7 @@ section.hero {
 
 /* Services List */
 .serviceInfo .servicesList {
-
   padding: 64px 0;
-  /* border-top: solid 1px var(--dark-azure-40);
-  border-bottom: solid 1px var(--dark-azure-40); */
   align-items: center;
   flex-direction: column;
   max-width: var(--desktop);
@@ -267,7 +281,6 @@ section.hero {
   }
 
   .serviceInfo > .servicesList {
-    margin: 48px auto 0;
     padding: 48px 0;
   }
 
