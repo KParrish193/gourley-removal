@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./Parallax.module.css";
+import styles from "./parallax.module.css";
 
 type ParallaxProps = {
   children: React.ReactNode;
