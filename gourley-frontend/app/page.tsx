@@ -170,7 +170,7 @@ export default async function Home() {
           </section>
           
         <AnimatedScroll>
-          <section>
+          <section className={"instagram"}>
             <InstagramFeed />
           </section>
         </AnimatedScroll>

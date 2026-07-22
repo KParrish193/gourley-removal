@@ -222,3 +222,20 @@ button.eapps-instagram-feed-posts-grid-load-more > span {
   font-size: 1rem !important;
   text-transform: capitalize;
 }
+
+div.elfsight-app-496c7291-7152-482e-9e3c-dd9a959987c8 {
+  position: relative;
+}
+
+div.elfsight-app-496c7291-7152-482e-9e3c-dd9a959987c8 > div {
+  z-index: 25;
+  background-color: var(--white);
+  padding-bottom: 52px;
+  margin-bottom: -52px;
+  position: sticky;
+  border: solid 2px purple;
+}
+
+.instagram {
+  margin-bottom: -64px;  
+}
