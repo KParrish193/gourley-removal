@@ -78,7 +78,7 @@ export async function POST(req: Request) {
       subject: `New Contact Form Submission: ${submissionId}`,
       replyTo: body.email,
       template: {
-        id: 'form_submissions',
+        id: 'form-submissions',
         variables: {
           SUBMISSION_ID: submissionId,
           TIMESTAMP: displayTimestamp,
