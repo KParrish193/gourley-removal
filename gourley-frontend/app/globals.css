@@ -141,7 +141,7 @@ a:hover {
     opacity: 0;
   }
   40% {
-    transform: translateX(8px) translateY(-18px);
+    transform: translateX(8px) translateY(-20px);
   }
   41% {
     transform: translateX(-25px) translateY(20px);
