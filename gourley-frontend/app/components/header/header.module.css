@@ -12,10 +12,12 @@
   border-bottom: solid 1px var(--dark-azure);
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 6px var(--dark-azure-20);
 }
 
 .header.scrolled {
   background-color: var(--white);
+
 }
 
 .header > .headerWrapper {

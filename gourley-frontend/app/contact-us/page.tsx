@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Alert from '../components/alert/alert';
+import AnimatedScroll from "../components/animations/reveal/Scroll"; 
 import { useState, useEffect } from "react";
 import styles from "./contact.module.css";
 
@@ -208,12 +209,15 @@ export default function Contact() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className={styles.desktopImg}>
-          <video autoPlay muted playsInline loop>
-            <source src="/videos/timelapse.mp4" type="video/mp4" />
-            Your browser does not support video playback.
-          </video>
-        </div>
+        
+        <AnimatedScroll>
+          <div className={styles.desktopImg}>
+            <video autoPlay muted playsInline loop>
+              <source src="/videos/timelapse.mp4" type="video/mp4" />
+              Your browser does not support video playback.
+            </video>
+          </div>
+        </AnimatedScroll>
 
         <div className={styles.formWrapper}>
           <h1>How Can We Help You?</h1>
