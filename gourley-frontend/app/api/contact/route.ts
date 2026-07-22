@@ -83,7 +83,7 @@ export async function POST(req: Request) {
           SUBMISSION_ID: submissionId,
           TIMESTAMP: displayTimestamp,
           CUSTOMER_FIRST_NAME: body.firstName,
-          CUTSOMER_LAST_NAME: body.lastName,
+          CUSTOMER_LAST_NAME: body.lastName,
           CUSTOMER_PHONE: body.phone,
           CUSTOMER_EMAIL: body.email,
           JOB_TYPE: body.jobType,
