@@ -39,10 +39,7 @@ body {
   font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body p {
-  letter-spacing: 0.02rem;
+  letter-spacing: -1.5px;
 }
 
 * {
