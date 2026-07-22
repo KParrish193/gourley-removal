@@ -24,10 +24,28 @@
   padding: 0 1.5rem;
 }
 
-/*? hero ?*/
+/* animated divider wrapper */
+.dividerWrapper {
+  margin: 64px auto 48px;
+}
+
+@media (max-width: 1052px) {
+  .dividerWrapper {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 769px) {
+  .dividerWrapper {
+    margin: 48px auto 0;
+  }
+}
+
+/* hero styles*/
 section.hero {
   padding: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .heroPanel {
@@ -83,8 +101,8 @@ section.hero {
 }
 
 
-/*? services ?*/
-.serviceInfo > div {
+/* Services Section */
+.serviceInfo > div > div {
   display: flex;
 }
 
@@ -93,7 +111,7 @@ section.hero {
 }
 
 /* map block */
-.serviceInfo > .serviceArea {
+.serviceInfo .serviceArea {
   align-items: center;
   gap: 64px;
   justify-content: space-between;
@@ -101,70 +119,68 @@ section.hero {
   max-width: var(--fullhd);
 }
 
-.serviceInfo > .serviceArea p {
+.serviceInfo .serviceArea p {
   margin-bottom: 24px;
   max-width: 400px;
 }
 
-.serviceInfo > .serviceArea img {
+.serviceInfo .serviceArea img {
   display: block;
 }
 
-/* services list */
-.serviceInfo > .servicesList {
-  margin: 64px auto 48px;
+/* Services List */
+.serviceInfo .servicesList {
   padding: 64px 0;
-  border-top: solid 1px var(--dark-azure-40);
-  border-bottom: solid 1px var(--dark-azure-40);
   align-items: center;
   flex-direction: column;
   max-width: var(--desktop);
 }
 
-.serviceInfo > .servicesList li {
+.serviceInfo .servicesList li {
   list-style: none;
   position: relative;
   padding-left: 36px;
 }
 
-.serviceInfo > .servicesList li img {
+.serviceInfo .servicesList li img {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
 }
 
-.serviceInfo > .servicesList a {
+.serviceInfo .servicesList a {
   margin-top: 2.4rem;
 }
 
-.serviceInfo > .servicesList > div:first-of-type {
+.serviceInfo .servicesList > div:first-of-type {
   justify-content: flex-start;
 }
 
 
-/*? about ?*/
+/* About Section */
 /* fifty fifty blocks */
-.fiftyFifty {
+.fiftyFifty > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 64px;
+  width: 100%;
   max-width: var(--fullhd);
   margin: 0 auto 24px;
 }
 
-.fiftyFifty > div {
+.fiftyFifty > div > div {
   width: 50%;
   display: flex;
 }
 
-.fiftyFifty:nth-of-type(2n) {
+.fiftyFifty:nth-of-type(2n) > div {
   flex-direction: row-reverse;
 }
 
-.fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
+.fiftyFifty:nth-of-type(2n + 1) > div > div:nth-of-type(2) {
   justify-content: flex-end;
 }
 
@@ -186,8 +202,9 @@ section.hero {
   object-position: 80% 0;
 }
 
+
 /* about section heading */
-.about .fiftyFifty:first-of-type {
+.aboutHeader {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -195,16 +212,14 @@ section.hero {
   margin-bottom: 0;
 }
 
-.about .fiftyFifty:first-of-type > h3 {
+.aboutHeader > h3 {
   margin-bottom: 0;
 }
 
-.fiftyFifty > h4 {
+.aboutHeader > h4 {
   color: var(--burnt-orange);
   margin-bottom: 2rem;
 }
-
-
 
 /* small desktop/most mobile */
 @media (max-width: 1052px) {
@@ -227,13 +242,13 @@ section.hero {
     max-width: 85%;
   }
 
-  .about .fiftyFifty:first-of-type {
+  .aboutHeader {
     margin: 0 0 -16px;
   }
 
   .serviceInfo > .serviceArea,
-  .fiftyFifty,
-  .fiftyFifty:nth-of-type(2n) {
+  .fiftyFifty >div,
+  .fiftyFifty:nth-of-type(2n) > div {
     gap: 32px;
   }
 
@@ -269,7 +284,6 @@ section.hero {
   }
 
   .serviceInfo > .servicesList {
-    margin: 48px auto 0;
     padding: 48px 0;
   }
 
@@ -278,7 +292,7 @@ section.hero {
     height: auto;
   }
 
-  .about .fiftyFifty:first-of-type {
+  .aboutHeader {
     margin: 0 0 -28px;
   }
 
@@ -286,21 +300,23 @@ section.hero {
     margin: 0;
   }
 
-  .fiftyFifty,
-  .fiftyFifty:nth-of-type(2n) {
+  .fiftyFifty > div,
+  .fiftyFifty:nth-of-type(2n) > div {
     flex-direction: column;
     gap: 48px;
     margin-top: 48px;
 
   }
 
-  .fiftyFifty > div {
+  .fiftyFifty > div > div {
     width: 100%;
     max-width: 500px;
   }
   
-  .fiftyFifty div:nth-of-type(2),
-  .fiftyFifty:nth-of-type(2n + 1) > div:nth-of-type(2) {
+  .fiftyFifty > div > div:nth-of-type(2),
+  .fiftyFifty:nth-of-type(2n + 1) > div > div:nth-of-type(2) {
     justify-content: center;
   }
 }
+
+

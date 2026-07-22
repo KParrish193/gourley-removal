@@ -1,0 +1,11 @@
+.scrollReveal {
+    opacity: 0;
+    transform: translateY(32px);
+    width: 100%;
+    transition:opacity 700ms ease, transform 700ms ease; 
+}
+
+.scrollReveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

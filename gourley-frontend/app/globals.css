@@ -132,31 +132,31 @@ a:hover {
 
 @keyframes diagonal-up {
   0% {
-    transform: translateX(1) translateY(1);
+    transform: translateX(0) translateY(-50%);
   }
   18% {
     opacity: 1;
   }
-  30% {
+  40% {
+    transform: translateX(30px) translateY(-25px);
+  }
+  45% {
     opacity: 0;
   }
-  40% {
-    transform: translateX(8px) translateY(-18px);
-  }
-  41% {
-    transform: translateX(-25px) translateY(20px);
+  50% {
+    transform: translateX(-30px) translateY(25px);
     opacity: 0;
   }
   60% {
     opacity: 1;
   }
   100% {
-    transform: translateX(1) translateY(1);
+    transform: translateX(0) translateY(-50%);
   }
 }
 
 .arrow-button:hover img {
-  animation: diagonal-up 0.5s cubic-bezier(0.82, 0.14, 0.23, 0.885);
+  animation: diagonal-up 0.7s cubic-bezier(0.82, 0.14, 0.23, 0.885);
   filter: brightness(0) saturate(100%) invert(99%) sepia(33%) saturate(2481%) hue-rotate(21deg) brightness(96%) contrast(88%);
 }
 
@@ -170,9 +170,17 @@ a:hover {
   }
 }
 
+/* accessibility motion reduction */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal * {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
 
 /* customize instagram widget */
-
 .eui-widget-title,
 .eapps-instagram-feed {
     font-family: var(--font-heading) !important;
@@ -213,4 +221,20 @@ button.eapps-instagram-feed-posts-grid-load-more > span {
   font-weight: 600 !important;
   font-size: 1rem !important;
   text-transform: capitalize;
+}
+
+div.elfsight-app-496c7291-7152-482e-9e3c-dd9a959987c8 {
+  position: relative;
+}
+
+div.elfsight-app-496c7291-7152-482e-9e3c-dd9a959987c8 > div {
+  z-index: 25;
+  background-color: var(--white);
+  padding-bottom: 52px;
+  margin-bottom: -52px;
+  position: sticky;
+}
+
+.instagram {
+  margin-bottom: -64px;  
 }
