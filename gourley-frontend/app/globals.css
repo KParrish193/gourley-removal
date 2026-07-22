@@ -107,7 +107,7 @@ a:hover {
 .button-secondary:hover {
   transition: all 0.2 ease;
   cursor: pointer;
-  border: solid 2.2px var(--burnt-orange);
+  border: solid 1.5px var(--burnt-orange);
   color: var(--burnt-orange);
 }
 

@@ -79,18 +79,20 @@ export async function POST(req: Request) {
       replyTo: body.email,
       // TODO: format email template
       html: `
-      <div style="border: solid 2px black; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="border-bottom: solid 2px black;">A new inquiry has been submitted through the website.</div>
-        <div style="display: flex; justify-content: space-between">
-          <div style="width: 49%; padding: 4px; border-right: 2px solid black;"><b>Submitted at: ${displayTimestamp}</b></div><div style="width: 49%; padding: 4px;><b>${submissionId}</b></div>
-        </div>
-        <div style="display: flex; justify-content: space-between">
-          <div style="width: 49%; padding: 4px; border-right: 2px solid black;">E-mail: ${body.email}</div><div style="width: 49%; padding: 4px;>Phone: ${body.phone}</div>
-        </div>
-        <div style="padding: 4px; border-top: solid 2px black; border-bottom: solid 2px black;">Customer Name: ${body.firstName} ${body.lastName}</div>
-        <div style="padding: 4px;">${body.jobType}</div>
-        <div style="padding: 4px; min-height: 300px; border-top: solid 2px black;">${body.description}</div>
-      </div>`
+        <div style="width: 100%; padding: 4px; text-align: center;">A new inquiry has been submitted through the website</div>
+        <div style="border: solid 2px black; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; min-width: 100%; border-bottom: solid 2px black;">
+            <div style="width: 49%; padding: 4px;"><b>Submitted at: ${displayTimestamp}</b></div>
+            <div style="width: 49%; padding: 4px; text-align: right;"><b>${submissionId}</b></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; min-width: width: 100%">
+            <div style="width: 49%; padding: 4px; border-right: 2px solid black;">E-mail: ${body.email}</div>
+            <div style="width: 49%; padding: 4px;">Phone: ${body.phone}</div>
+          </div>
+          <div style="padding: 4px; border-top: solid 2px black; border-bottom: solid 2px black;">Customer Name: ${body.firstName} ${body.lastName}</div>
+          <div style="padding: 4px;">Job Type: ${body.jobType}</div>
+          <div style="padding: 4px; min-height: 300px; border-top: solid 2px black;">Description: ${body.description}</div>
+        </div>`
     });
 
     if (error) throw new Error(error.message);
