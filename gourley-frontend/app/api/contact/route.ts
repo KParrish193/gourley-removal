@@ -22,6 +22,21 @@ function getSheetsClient() {
 }
 
 export async function POST(req: Request) {
+  // generate unique submission ID per request
+  const submissionId = `GTR-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  
+  // generate timestamp in Hawaii Time
+  const timestamp = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Pacific/Honolulu",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date());
+  const displayTimestamp = `${timestamp} HST`;
+
   const auth = getSheetsClient();
   const sheets = google.sheets({ version: "v4", auth });
 
@@ -37,8 +52,8 @@ export async function POST(req: Request) {
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [[
-            // add unique submissionID
-            new Date().toLocaleString(),
+            submissionId,
+            displayTimestamp,
             body.firstName,
             body.lastName,
             body.phone,
@@ -48,7 +63,6 @@ export async function POST(req: Request) {
         ]],
       },
     });
-
     sheetStatus = `success`;
   } catch (err: unknown) {
       sheetStatus = 
@@ -61,10 +75,22 @@ export async function POST(req: Request) {
     const { error } = await resend.emails.send({
       from: `Gourley Tree Removal Site <${process.env.EMAIL_FROM}>`,
       to: `${process.env.EMAIL_TO}`,
-      subject: "New Contact Form Submission",
+      subject: `New Contact Form Submission: ${submissionId}`,
       replyTo: body.email,
       // TODO: format email template
-      text: `New contact form submission:\n\n${JSON.stringify(body, null, 2)}`,
+      html: `
+      <div style="border: solid 2px black; display: flex; flex-direction: column; align-items: flex-start;">
+        <div style="border-bottom: solid 2px black;">A new inquiry has been submitted through the website.</div>
+        <div style="display: flex; justify-content: space-between">
+          <div style="width: 49%; padding: 4px; border-right: 2px solid black;"><b>Submitted at: ${displayTimestamp}</b></div><div style="width: 49%; padding: 4px;><b>${submissionId}</b></div>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <div style="width: 49%; padding: 4px; border-right: 2px solid black;">E-mail: ${body.email}</div><div style="width: 49%; padding: 4px;>Phone: ${body.phone}</div>
+        </div>
+        <div style="padding: 4px; border-top: solid 2px black; border-bottom: solid 2px black;">Customer Name: ${body.firstName} ${body.lastName}</div>
+        <div style="padding: 4px;">${body.jobType}</div>
+        <div style="padding: 4px; min-height: 300px; border-top: solid 2px black;">${body.description}</div>
+      </div>`
     });
 
     if (error) throw new Error(error.message);
