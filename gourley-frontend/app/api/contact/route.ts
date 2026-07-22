@@ -73,26 +73,23 @@ export async function POST(req: Request) {
   //Step 2: Send email with Resend
   try {
     const { error } = await resend.emails.send({
-      from: `Gourley Tree Removal Site <${process.env.EMAIL_FROM}>`,
+      from: `Gourley Tree Removal Site: <${process.env.EMAIL_FROM}>`,
       to: `${process.env.EMAIL_TO}`,
       subject: `New Contact Form Submission: ${submissionId}`,
       replyTo: body.email,
-      // TODO: format email template
-      html: `
-        <div style="width: 100%; padding: 4px; text-align: center;">A new inquiry has been submitted through the website</div>
-        <div style="border: solid 2px black; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; min-width: 100%; border-bottom: solid 2px black;">
-            <div style="width: 49%; padding: 4px;"><b>Submitted at: ${displayTimestamp}</b></div>
-            <div style="width: 49%; padding: 4px; text-align: right;"><b>${submissionId}</b></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; min-width: width: 100%">
-            <div style="width: 49%; padding: 4px; border-right: 2px solid black;">E-mail: ${body.email}</div>
-            <div style="width: 49%; padding: 4px;">Phone: ${body.phone}</div>
-          </div>
-          <div style="padding: 4px; border-top: solid 2px black; border-bottom: solid 2px black;">Customer Name: ${body.firstName} ${body.lastName}</div>
-          <div style="padding: 4px;">Job Type: ${body.jobType}</div>
-          <div style="padding: 4px; min-height: 300px; border-top: solid 2px black;">Description: ${body.description}</div>
-        </div>`
+      template: {
+        id: 'form_submissions',
+        variables: {
+          SUBMISSION_ID: submissionId,
+          TIMESTAMP: displayTimestamp,
+          CUSTOMER_FIRST_NAME: body.firstName,
+          CUTSOMER_LAST_NAME: body.lastName,
+          CUSTOMER_PHONE: body.phone,
+          CUSTOMER_EMAIL: body.email,
+          JOB_TYPE: body.jobType,
+          JOB_DESCRIPTION: body.description
+        },
+      },
     });
 
     if (error) throw new Error(error.message);
