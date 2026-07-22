@@ -16,7 +16,7 @@ export default function Header() {
   useEffect(() => {
 
     let prevScrollPos = window.scrollY;
-    const threshold = 5; // pixels you must scroll before toggling
+    const threshold = 15; // pixels you must scroll before toggling
     const hideAfter = 80; // how far down before hiding can happen
     
     const handleScroll = () => {
@@ -33,7 +33,7 @@ export default function Header() {
       // Only hide if we've scrolled past the initial visible area 
       if (currentScrollPos > hideAfter) { if (currentScrollPos - prevScrollPos > threshold) { 
         // scrolling down past threshold 
-        headerRef.current.style.top = "-75px"; } else if (prevScrollPos - currentScrollPos > threshold) { 
+        headerRef.current.style.top = "-105px"; } else if (prevScrollPos - currentScrollPos > threshold) { 
           // scrolling up past threshold 
           headerRef.current.style.top = "0px"; } } else { 
             // always show if we're near the top 

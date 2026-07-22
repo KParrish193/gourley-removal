@@ -46,7 +46,7 @@ filter: brightness(0) saturate(100%) invert(99%) sepia(33%) saturate(2481%) hue-
 
 .phone > a > img {
   display: block;
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.5rem -4px 0;
 }
 
 .icon:hover {

@@ -22,6 +22,21 @@ function getSheetsClient() {
 }
 
 export async function POST(req: Request) {
+  // generate unique submission ID per request
+  const submissionId = `GTR-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  
+  // generate timestamp in Hawaii Time
+  const timestamp = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Pacific/Honolulu",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date());
+  const displayTimestamp = `${timestamp} HST`;
+
   const auth = getSheetsClient();
   const sheets = google.sheets({ version: "v4", auth });
 
@@ -37,8 +52,8 @@ export async function POST(req: Request) {
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [[
-            // add unique submissionID
-            new Date().toLocaleString(),
+            submissionId,
+            displayTimestamp,
             body.firstName,
             body.lastName,
             body.phone,
@@ -48,7 +63,6 @@ export async function POST(req: Request) {
         ]],
       },
     });
-
     sheetStatus = `success`;
   } catch (err: unknown) {
       sheetStatus = 
@@ -59,12 +73,23 @@ export async function POST(req: Request) {
   //Step 2: Send email with Resend
   try {
     const { error } = await resend.emails.send({
-      from: `Gourley Tree Removal Site <${process.env.EMAIL_FROM}>`,
+      from: `Gourley Tree Removal Site: <${process.env.EMAIL_FROM}>`,
       to: `${process.env.EMAIL_TO}`,
-      subject: "New Contact Form Submission",
+      subject: `New Contact Form Submission: ${submissionId}`,
       replyTo: body.email,
-      // TODO: format email template
-      text: `New contact form submission:\n\n${JSON.stringify(body, null, 2)}`,
+      template: {
+        id: 'form-submission',
+        variables: {
+          SUBMISSION_ID: submissionId,
+          TIMESTAMP: displayTimestamp,
+          CUSTOMER_FIRST_NAME: body.firstName,
+          CUSTOMER_LAST_NAME: body.lastName,
+          CUSTOMER_PHONE: body.phone,
+          CUSTOMER_EMAIL: body.email,
+          JOB_TYPE: body.jobType,
+          JOB_DESCRIPTION: body.description
+        },
+      },
     });
 
     if (error) throw new Error(error.message);
