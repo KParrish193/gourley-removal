@@ -282,7 +282,7 @@ section.hero {
       object-position: 65% 0%;
   }
 
-  .serviceInfo > .serviceArea {
+  .serviceInfo > div > .serviceArea {
     flex-direction: column;
     align-items: flex-start;
     max-width: 100%;
